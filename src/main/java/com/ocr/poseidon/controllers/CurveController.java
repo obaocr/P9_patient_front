@@ -1,6 +1,6 @@
-package com.nnk.springboot.controllers;
+package com.ocr.poseidon.controllers;
 
-import com.nnk.springboot.domain.CurvePoint;
+import com.ocr.poseidon.domain.CurvePoint;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

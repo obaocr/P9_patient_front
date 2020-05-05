@@ -1,6 +1,6 @@
-package com.nnk.springboot.controllers;
+package com.ocr.poseidon.controllers;
 
-import com.nnk.springboot.domain.RuleName;
+import com.ocr.poseidon.domain.RuleName;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

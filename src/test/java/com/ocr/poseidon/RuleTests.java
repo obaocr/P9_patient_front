@@ -1,7 +1,7 @@
-package com.nnk.springboot;
+package com.ocr.poseidon;
 
-import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.repositories.RuleNameRepository;
+import com.ocr.poseidon.domain.RuleName;
+import com.ocr.poseidon.repositories.RuleNameRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

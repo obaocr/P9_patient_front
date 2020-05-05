@@ -35,6 +35,12 @@ public class BidList {
     private String sourceListId;
     private String side;
 
+    public BidList(@NotNull String account, @NotNull String type, Double bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
+
     public Integer getBidListId() {
         return bidListId;
     }

@@ -14,8 +14,10 @@ import java.util.Arrays;
 
 @Service
 public class MyAppUserDetailsService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByUserName(userName);

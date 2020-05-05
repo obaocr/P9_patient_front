@@ -1,7 +1,7 @@
-package com.nnk.springboot.controllers;
+package com.ocr.poseidon.controllers;
 
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
+import com.ocr.poseidon.domain.User;
+import com.ocr.poseidon.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
