@@ -1,4 +1,4 @@
-package com.nnk.springboot.domain;
+package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

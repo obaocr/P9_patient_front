@@ -22,9 +22,9 @@ CREATE TABLE BidList (
   dealType VARCHAR(125),
   sourceListId VARCHAR(125),
   side VARCHAR(125),
-
   PRIMARY KEY (BidListId)
 )
+;
 
 CREATE TABLE Trade (
   TradeId tinyint(4) NOT NULL AUTO_INCREMENT,
@@ -48,9 +48,9 @@ CREATE TABLE Trade (
   dealType VARCHAR(125),
   sourceListId VARCHAR(125),
   side VARCHAR(125),
-
   PRIMARY KEY (TradeId)
 )
+;
 
 CREATE TABLE CurvePoint (
   Id tinyint(4) NOT NULL AUTO_INCREMENT,
@@ -59,9 +59,9 @@ CREATE TABLE CurvePoint (
   term DOUBLE ,
   value DOUBLE ,
   creationDate TIMESTAMP ,
-
   PRIMARY KEY (Id)
 )
+;
 
 CREATE TABLE Rating (
   Id tinyint(4) NOT NULL AUTO_INCREMENT,
@@ -69,9 +69,9 @@ CREATE TABLE Rating (
   sandPRating VARCHAR(125),
   fitchRating VARCHAR(125),
   orderNumber tinyint,
-
   PRIMARY KEY (Id)
 )
+;
 
 CREATE TABLE RuleName (
   Id tinyint(4) NOT NULL AUTO_INCREMENT,
@@ -81,9 +81,9 @@ CREATE TABLE RuleName (
   template VARCHAR(512),
   sqlStr VARCHAR(125),
   sqlPart VARCHAR(125),
-
   PRIMARY KEY (Id)
 )
+;
 
 CREATE TABLE Users (
   Id tinyint(4) NOT NULL AUTO_INCREMENT,
@@ -91,9 +91,9 @@ CREATE TABLE Users (
   password VARCHAR(125),
   fullname VARCHAR(125),
   role VARCHAR(125),
-
   PRIMARY KEY (Id)
 )
+;
 
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN")
-insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER")
+insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
+insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");

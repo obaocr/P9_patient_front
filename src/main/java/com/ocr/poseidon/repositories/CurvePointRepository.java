@@ -1,6 +1,6 @@
-package com.nnk.springboot.repositories;
+package com.ocr.poseidon.repositories;
 
-import com.nnk.springboot.domain.CurvePoint;
+import com.ocr.poseidon.domain.CurvePoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

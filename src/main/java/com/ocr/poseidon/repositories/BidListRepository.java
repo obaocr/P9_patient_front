@@ -1,6 +1,6 @@
-package com.nnk.springboot.repositories;
+package com.ocr.poseidon.repositories;
 
-import com.nnk.springboot.domain.BidList;
+import com.ocr.poseidon.domain.BidList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

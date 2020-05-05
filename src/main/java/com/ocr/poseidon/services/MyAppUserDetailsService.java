@@ -1,7 +1,7 @@
-package com.nnk.springboot.services;
+package com.ocr.poseidon.services;
 
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
+import com.ocr.poseidon.domain.User;
+import com.ocr.poseidon.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
