@@ -5,12 +5,15 @@ import javax.persistence.*;
 @Table(name = "rating")
 public class Rating {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer Id;
     private String moodysRating;
     private String sandPRating;
     private String fitchRating;
     private Integer orderNumber;
+
+    public Rating() {
+    }
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
         this.moodysRating = moodysRating;
@@ -20,11 +23,11 @@ public class Rating {
     }
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.Id = Id;
     }
 
     public String getMoodysRating() {

@@ -2,6 +2,7 @@ package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 
@@ -9,8 +10,8 @@ import java.time.LocalDateTime;
 @Table(name = "trade")
 public class Trade {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer tradeId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer TradeId;
     @NotNull
     private String account;
     @NotNull
@@ -19,20 +20,26 @@ public class Trade {
     private Double sellQuantity;
     private Double buyPrice;
     private Double sellPrice;
-    private String tradeDate;
+    @Basic
+    private LocalDateTime tradeDate;
     private String security;
     private String status;
     private String trader;
     private String benchmark;
     private String book;
     private String creationName;
+    @Basic
     private LocalDateTime creationDate;
     private String revisionName;
+    @Basic
     private LocalDateTime revisionDate;
     private String dealName;
     private String dealType;
     private String sourceListId;
     private String side;
+
+    public Trade() {
+    }
 
     public Trade(@NotNull String account, @NotNull String type) {
         this.account = account;
@@ -40,11 +47,11 @@ public class Trade {
     }
 
     public Integer getTradeId() {
-        return tradeId;
+        return TradeId;
     }
 
     public void setTradeId(Integer tradeId) {
-        this.tradeId = tradeId;
+        this.TradeId = TradeId;
     }
 
     public String getAccount() {
@@ -95,11 +102,11 @@ public class Trade {
         this.sellPrice = sellPrice;
     }
 
-    public String getTradeDate() {
+    public LocalDateTime getTradeDate() {
         return tradeDate;
     }
 
-    public void setTradeDate(String tradeDate) {
+    public void setTradeDate(LocalDateTime tradeDate) {
         this.tradeDate = tradeDate;
     }
 

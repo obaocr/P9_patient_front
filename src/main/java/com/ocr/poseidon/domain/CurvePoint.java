@@ -1,10 +1,6 @@
 package com.ocr.poseidon.domain;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -13,12 +9,14 @@ import java.time.LocalDateTime;
 @Table(name = "curvepoint")
 public class CurvePoint {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer Id;
     private Integer curveId;
+    @Basic
     private LocalDateTime asOfDate;
     private Double term;
     private Double value;
+    @Basic
     private LocalDateTime creationDate;
 
     public CurvePoint(Integer curveId, Double term, Double value) {
@@ -27,12 +25,15 @@ public class CurvePoint {
         this.value = value;
     }
 
+    public CurvePoint() {
+    }
+
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.Id = Id;
     }
 
     public Integer getCurveId() {

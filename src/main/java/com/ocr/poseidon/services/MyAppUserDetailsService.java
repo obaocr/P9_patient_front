@@ -2,6 +2,8 @@ package com.ocr.poseidon.services;
 
 import com.ocr.poseidon.domain.User;
 import com.ocr.poseidon.repositories.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +16,8 @@ import java.util.Arrays;
 
 @Service
 public class MyAppUserDetailsService implements UserDetailsService {
+
+    private static final Logger log = LogManager.getLogger(MyAppUserDetailsService.class);
 
     @Autowired
     private UserRepository userRepository;

@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 public class BidList {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer bidListId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer BidListId;
     @NotNull
     private String account;
     @NotNull
@@ -20,6 +20,7 @@ public class BidList {
     private Double bid;
     private Double ask;
     private String benchmark;
+    @Basic
     private LocalDateTime bidListDate;
     private String commentary;
     private String security;
@@ -27,13 +28,18 @@ public class BidList {
     private String trader;
     private String book;
     private String creationName;
+    @Basic
     private LocalDateTime creationDate;
     private String revisionName;
+    @Basic
     private LocalDateTime revisionDate;
     private String dealName;
     private String dealType;
     private String sourceListId;
     private String side;
+
+    public BidList() {
+    }
 
     public BidList(@NotNull String account, @NotNull String type, Double bidQuantity) {
         this.account = account;
@@ -42,11 +48,11 @@ public class BidList {
     }
 
     public Integer getBidListId() {
-        return bidListId;
+        return BidListId;
     }
 
     public void setBidListId(Integer bidListId) {
-        this.bidListId = bidListId;
+        this.BidListId = BidListId;
     }
 
     public String getAccount() {

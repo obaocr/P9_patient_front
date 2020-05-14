@@ -1,6 +1,8 @@
 package com.ocr.poseidon.config;
 
 import com.ocr.poseidon.services.MyAppUserDetailsService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final Logger log = LogManager.getLogger(SecurityConfig.class);
 
     @Autowired
     private MyAppUserDetailsService myAppUserDetailsService;

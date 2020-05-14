@@ -1,6 +1,12 @@
+drop table testp7.bidlist;
+drop table testp7.curvepoint;
+drop table testp7.rating;
+drop table testp7.rulename;
+drop table testp7.trade;
+drop table testp7.users;
 
 CREATE TABLE BidList (
-  BidListId tinyint(4) NOT NULL AUTO_INCREMENT,
+  BidListId INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
   bidQuantity DOUBLE,
@@ -27,7 +33,7 @@ CREATE TABLE BidList (
 ;
 
 CREATE TABLE Trade (
-  TradeId tinyint(4) NOT NULL AUTO_INCREMENT,
+  TradeId INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
   buyQuantity DOUBLE,
@@ -53,8 +59,8 @@ CREATE TABLE Trade (
 ;
 
 CREATE TABLE CurvePoint (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
-  CurveId tinyint,
+  Id INT NOT NULL AUTO_INCREMENT,
+  CurveId INT,
   asOfDate TIMESTAMP,
   term DOUBLE ,
   value DOUBLE ,
@@ -64,17 +70,17 @@ CREATE TABLE CurvePoint (
 ;
 
 CREATE TABLE Rating (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id INT NOT NULL AUTO_INCREMENT,
   moodysRating VARCHAR(125),
   sandPRating VARCHAR(125),
   fitchRating VARCHAR(125),
-  orderNumber tinyint,
+  orderNumber INT,
   PRIMARY KEY (Id)
 )
 ;
 
 CREATE TABLE RuleName (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(125),
   description VARCHAR(125),
   json VARCHAR(125),
@@ -86,7 +92,7 @@ CREATE TABLE RuleName (
 ;
 
 CREATE TABLE Users (
-  Id tinyint(4) NOT NULL AUTO_INCREMENT,
+  Id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(125),
   password VARCHAR(125),
   fullname VARCHAR(125),
@@ -95,5 +101,6 @@ CREATE TABLE Users (
 )
 ;
 
-insert into Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
-insert into Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
+insert into testp7.Users(fullname, username, password, role) values("Administrator", "admin", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "ADMIN");
+insert into testp7.Users(fullname, username, password, role) values("User", "user", "$2a$10$pBV8ILO/s/nao4wVnGLrh.sa/rnr5pDpbeC4E.KNzQWoy8obFZdaa", "USER");
+

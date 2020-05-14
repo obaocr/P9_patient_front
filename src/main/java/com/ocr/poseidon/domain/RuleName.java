@@ -6,14 +6,17 @@ import javax.persistence.*;
 @Table(name = "rulename")
 public class RuleName {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer Id;
     private String name;
     private String description;
     private String json;
     private String template;
     private String sqlStr;
     private String sqlPart;
+
+    public RuleName() {
+    }
 
     public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
         this.name = name;
@@ -25,11 +28,11 @@ public class RuleName {
     }
 
     public Integer getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getName() {

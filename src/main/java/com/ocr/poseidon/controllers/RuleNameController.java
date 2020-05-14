@@ -1,6 +1,8 @@
 package com.ocr.poseidon.controllers;
 
 import com.ocr.poseidon.domain.RuleName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,9 @@ import javax.validation.Valid;
 
 @Controller
 public class RuleNameController {
+
+    private static final Logger log = LogManager.getLogger(RuleNameController.class);
+
     // TODO: Inject RuleName service
 
     @RequestMapping("/ruleName/list")

@@ -1,6 +1,8 @@
 package com.ocr.poseidon.controllers;
 
 import com.ocr.poseidon.domain.BidList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,9 @@ import javax.validation.Valid;
 
 @Controller
 public class BidListController {
+
+    private static final Logger log = LogManager.getLogger(BidListController.class);
+
     // TODO: Inject Bid service
 
     @RequestMapping("/bidList/list")
