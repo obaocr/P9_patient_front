@@ -1,6 +1,8 @@
 package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -12,13 +14,17 @@ public class Trade {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer TradeId;
-    @NotNull
+    @NotBlank
     private String account;
-    @NotNull
+    @NotBlank
     private String type;
+    @Digits(integer=5, fraction=0)
     private Double buyQuantity;
+    @Digits(integer=5, fraction=0)
     private Double sellQuantity;
+    @Digits(integer=5, fraction=0)
     private Double buyPrice;
+    @Digits(integer=5, fraction=0)
     private Double sellPrice;
     @Basic
     private LocalDateTime tradeDate;

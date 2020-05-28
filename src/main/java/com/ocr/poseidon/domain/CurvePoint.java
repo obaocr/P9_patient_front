@@ -1,6 +1,7 @@
 package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -14,7 +15,9 @@ public class CurvePoint {
     private Integer curveId;
     @Basic
     private LocalDateTime asOfDate;
+    @Digits(integer=5, fraction=0)
     private Double term;
+    @Digits(integer=5, fraction=0)
     private Double value;
     @Basic
     private LocalDateTime creationDate;

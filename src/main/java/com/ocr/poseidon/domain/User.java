@@ -2,6 +2,8 @@ package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -12,8 +14,10 @@ public class User {
     @NotBlank(message = "Username is mandatory")
     private String username;
     @NotBlank(message = "Password is mandatory")
+    @Size(min=2)
     private String password;
     @NotBlank(message = "FullName is mandatory")
+    @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must be >= 8 characters, 1 UpperCase, 1 symbol, 1 digit")
     private String fullname;
     @NotBlank(message = "Role is mandatory")
     private String role;

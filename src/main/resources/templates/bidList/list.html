@@ -25,11 +25,11 @@
 	</div>
 	<div class="row"><h2>Bid List</h2></div>
 	<div class="row">
-		<a href="/bidList/add" class="btn btn-primary btn-sm">Add New</a>
+		<a href="/bidList/add" style="margin-bottom:10px" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>BidListId</th>
 					<th>Account</th>
 					<th>Type</th>
 					<th>Bid Quantity</th>
@@ -38,6 +38,19 @@
 			</thead>
 			<tbody>
 				<!-- TODO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
+				<tr th:if="${bidlists.empty}">
+					<td colspan="2"> No bidlists Available </td>
+				</tr>
+				<tr th:each="bidlist : ${bidlists}">
+					<td><span th:text="${bidlist.bidListId}"> bidListId </span></td>
+					<td><span th:text="${bidlist.account}"> account </span></td>
+					<td><span th:text="${bidlist.type}"> type </span></td>
+					<td><span th:text="${bidlist.bidQuantity}"> bidQuantity </span></td>
+					<td>
+						<a th:href="@{'/bidList/update/' + ${bidlist.bidListId}}" > Update </a> |
+						<a th:href="@{'/bidList/delete/' + ${bidlist.bidListId}}" > Delete </a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

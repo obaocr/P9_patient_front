@@ -6,7 +6,7 @@ drop table testp7.trade;
 drop table testp7.users;
 
 CREATE TABLE BidList (
-  BidListId INT NOT NULL AUTO_INCREMENT,
+  bidListId INT NOT NULL AUTO_INCREMENT,
   account VARCHAR(30) NOT NULL,
   type VARCHAR(30) NOT NULL,
   bidQuantity DOUBLE,

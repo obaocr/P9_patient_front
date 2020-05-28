@@ -1,7 +1,10 @@
 package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,14 +13,18 @@ public class BidList {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer BidListId;
-    @NotNull
+    private Integer bidListId;
+    @NotBlank (message="Please enter an account")
     private String account;
-    @NotNull
+    @NotBlank (message="Please enter an type")
     private String type;
+    @Digits(integer=5, fraction=0)
     private Double bidQuantity;
+    @Digits(integer=5, fraction=0)
     private Double askQuantity;
+    @Digits(integer=5, fraction=0)
     private Double bid;
+    @Digits(integer=5, fraction=0)
     private Double ask;
     private String benchmark;
     @Basic
@@ -48,11 +55,11 @@ public class BidList {
     }
 
     public Integer getBidListId() {
-        return BidListId;
+        return bidListId;
     }
 
     public void setBidListId(Integer bidListId) {
-        this.BidListId = BidListId;
+        this.bidListId = this.bidListId;
     }
 
     public String getAccount() {

@@ -15,9 +15,31 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/bidList/validate}" th:object="${bidList}" method="post" class="form-horizontal" style="width: 100%">
+
 			<!--
-			TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
-			 -->
+				TODO: Create a form to input the values of Bid, there are 2 buttons: Save data and Cancel to the list Bid
+            -->
+
+			<div th:if="${#fields.hasErrors('all')}" th:errors="*{all}" th:errorclass="fieldError"></div>
+
+			<div class="form-group" th:class="${#fields.hasErrors('account')}? has-error" >
+				<label for="account">Account</label>
+				<input type="text" th:field="*{account}" class="form-control" id="account" placeholder="Account"/>
+				<span th:if="${#fields.hasErrors('account')}" th:errors="*{account}" th:errorclass="fieldError">account Error</span>
+			</div>
+			<div class="form-group" th:class="${#fields.hasErrors('type')}? has-error">
+				<label for="type">Type</label>
+				<input type="text" th:field="*{type}" class="form-control" id="type" placeholder="Type"/>
+				<span th:if="${#fields.hasErrors('type')}" th:errors="*{type}" th:errorclass="fieldError">type Error</span>
+			</div>
+			<div class="form-group" th:class="${#fields.hasErrors('bidQuantity')}? has-error">
+				<label for="bidQuantity">Bid Quantity</label>
+				<input type="number" th:field="*{bidQuantity}" class="form-control" id="bidQuantity" placeholder="Bid Quantity"/>
+				<span th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}" th:errorclass="fieldError">bidQuantity Error</span>
+			</div>
+			<button style="margin-top:10px" class="btn btn-danger btn-sm" type="button" onclick="window.history.back();"> Cancel </button>
+			<button style="margin-top:10px" class="btn btn-primary btn-sm" type="submit">Submit</button>
+
 		</form>
 	</div>
 
