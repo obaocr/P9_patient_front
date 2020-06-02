@@ -24,23 +24,27 @@ public class TradeController {
     public String home(Model model)
     {
         // TODO: find all Trade, add to model
+        log.debug("home");
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
     public String addUser(Trade bid) {
+        log.debug("addUser");
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return Trade list
+        log.debug("validate");
         return "trade/add";
     }
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Trade by Id and to model then show to the form
+        log.debug("showUpdateForm");
         return "trade/update";
     }
 
@@ -48,12 +52,14 @@ public class TradeController {
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update Trade and return Trade list
+        log.debug("updateTrade");
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        log.debug("deleteTrade");
         return "redirect:/trade/list";
     }
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 
 @Controller
@@ -26,17 +25,17 @@ public class BidListController {
     BidListRepository bidListRepository;
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
-        // call service find all bids to show to the view
+    public String home(Model model) {
+        // TODO call service find all bids to show to the view
+        log.debug("home");
         model.addAttribute("bidlists", bidListRepository.findAll());
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
-    // !!!! j'ai modifie et mis (Model lodel)
-    //public String addBidForm(BidList bid) {
+    // !!!! j'ai modifie et mis (Model model) avant il y avait (BidList bid) :
     public String addBidForm(Model model) {
+        log.debug("addBidForm");
         BidList bidList = new BidList();
         model.addAttribute("bidList", bidList);
         return "bidList/add";
@@ -44,7 +43,8 @@ public class BidListController {
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        //  check data valid and save to db, after saving return bid list
+        log.debug("validate");
+        //  TODO check data valid and save to db, after saving return bid list
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
             return "bidList/add";
@@ -55,7 +55,8 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        //  get Bid by Id and to model then show to the form
+        //  TODO get Bid by Id and to model then show to the form
+        log.debug("showUpdateForm");
         BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
         model.addAttribute("bidList", bidList);
         return "bidList/update";
@@ -63,21 +64,29 @@ public class BidListController {
 
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
-        //  check required fields, if valid call service to update Bid and return list Bid
+                            BindingResult result, Model model) {
+        //  TODO check required fields, if valid call service to update Bid and return list Bid
+        log.debug("updateBid");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
             return "bidList/update";
         }
-        // TODO celà génère un INSERT au lieu de update ....
-        bidListRepository.save(bidList);
+        BidList bidListToUpdate = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
+        bidListToUpdate.setAccount(bidList.getAccount());
+        bidListToUpdate.setType(bidList.getType());
+        bidListToUpdate.setBidQuantity(bidList.getBidQuantity());
+        bidListRepository.save(bidListToUpdate);
+        model.addAttribute("bidLists", bidListRepository.findAll());
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        //  Find Bid by Id and delete the bid, return to Bid list
-        bidListRepository.deleteById(id);
+        //  TODO Find Bid by Id and delete the bid, return to Bid list
+        log.debug("deleteBid");
+        BidList bidList = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
+        bidListRepository.delete(bidList);
+        model.addAttribute("bidLists", bidListRepository.findAll());
         return "redirect:/bidList/list";
     }
 

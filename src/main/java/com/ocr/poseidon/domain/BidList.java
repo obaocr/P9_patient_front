@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,19 +11,19 @@ import java.time.LocalDateTime;
 public class BidList {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
-    @NotBlank (message="Please enter an account")
+    @NotBlank(message = "Please enter an account")
     private String account;
-    @NotBlank (message="Please enter an type")
+    @NotBlank(message = "Please enter an type")
     private String type;
-    @Digits(integer=5, fraction=0)
+    @Digits(integer = 5, fraction = 0)
     private Double bidQuantity;
-    @Digits(integer=5, fraction=0)
+    @Digits(integer = 5, fraction = 0)
     private Double askQuantity;
-    @Digits(integer=5, fraction=0)
+    @Digits(integer = 5, fraction = 0)
     private Double bid;
-    @Digits(integer=5, fraction=0)
+    @Digits(integer = 5, fraction = 0)
     private Double ask;
     private String benchmark;
     @Basic

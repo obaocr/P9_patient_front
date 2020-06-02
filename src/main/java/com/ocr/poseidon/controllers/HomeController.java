@@ -13,11 +13,13 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) {
+        log.debug("home");
         return "home";
     }
 
     @RequestMapping("/admin/home")
     public String adminHome(Model model) {
+        log.debug("adminHome");
         return "redirect:/bidList/list";
     }
 
