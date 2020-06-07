@@ -16,6 +16,46 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class BidListTest {
 
     @Test
+    void bidListConstructor()  {
+        BidList bidList = new BidList("Account","Type",1.0);
+        assertTrue(bidList.getType().equals("Type"));
+        assertTrue(bidList.getAccount().equals("Account"));
+        assertTrue(bidList.getBidQuantity() == 1.0);
+    }
+
+    @Test
+    void bidListShouldInstanciateBidlist() throws ParseException {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formatDateTime = now.format(format);
+        BidList bidList = new BidList();
+        bidList.setBid(1.0);
+        bidList.setBidQuantity(1.0);
+        bidList.setType("Type");
+        bidList.setAccount("Account");
+        bidList.setAsk(1.0);
+        bidList.setAskQuantity(1.0);
+        bidList.setBenchmark("Benchmark");
+        bidList.setBidListDate(now);
+        bidList.setBook("Book");
+        bidList.setCommentary("Commentary");
+        bidList.setCreationDate(now);
+        bidList.setCreationName("CreationName");
+        bidList.setDealName("DealName");
+        bidList.setDealType("DealType");
+        bidList.setRevisionDate(now);
+        bidList.setRevisionName("evisionName");
+        bidList.setSecurity("High");
+        bidList.setSide("Side");
+        bidList.setSourceListId("");
+        bidList.setStatus("Open");
+        bidList.setTrader("John");
+        assertTrue(bidList.getType().equals("Type"));
+        assertTrue(bidList.getBidListDate() == now);
+    }
+
+
+    @Test
     void constraintTypeNotNull () {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -64,35 +104,5 @@ class BidListTest {
         assertTrue(constraintViolations.size() == 0);
     }
 
-    @Test
-    void bidListShouldInstanciateBidlist() throws ParseException {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formatDateTime = now.format(format);
-        BidList bidList = new BidList();
-        bidList.setBid(1.0);
-        bidList.setBidQuantity(1.0);
-        bidList.setType("Type");
-        bidList.setAccount("Account");
-        bidList.setAsk(1.0);
-        bidList.setAskQuantity(1.0);
-        bidList.setBenchmark("Benchmark");
-        bidList.setBidListDate(now);
-        bidList.setBook("Book");
-        bidList.setCommentary("Commentary");
-        bidList.setCreationDate(now);
-        bidList.setCreationName("CreationName");
-        bidList.setDealName("DealName");
-        bidList.setDealType("DealType");
-        bidList.setRevisionDate(now);
-        bidList.setRevisionName("evisionName");
-        bidList.setSecurity("High");
-        bidList.setSide("Side");
-        bidList.setSourceListId("");
-        bidList.setStatus("Open");
-        bidList.setTrader("John");
-        assertTrue(bidList.getType() == "Type");
-        assertTrue(bidList.getBidListDate() == now);
-    }
 
 }

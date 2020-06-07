@@ -1,8 +1,12 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.BidList;
 import com.ocr.poseidon.domain.RuleName;
+import com.ocr.poseidon.repositories.BidListRepository;
+import com.ocr.poseidon.repositories.RuleNameRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,48 +22,72 @@ public class RuleNameController {
 
     private static final Logger log = LogManager.getLogger(RuleNameController.class);
 
-    // TODO: Inject RuleName service
+    @Autowired
+    RuleNameRepository ruleNameRepository;
 
     @RequestMapping("/ruleName/list")
     public String home(Model model)
     {
-        // TODO: find all RuleName, add to model
+        // TO-DO: find all RuleName, add to model
         log.debug("home");
+        model.addAttribute("ruleNames", ruleNameRepository.findAll());
         return "ruleName/list";
     }
 
     @GetMapping("/ruleName/add")
-    public String addRuleForm(RuleName bid) {
+    // !!!! j'ai modifie et mis (Model model) avant il y avait (RuleName bid) :
+    public String addRuleForm(Model model) {
         log.debug("addRuleForm");
+        RuleName ruleName = new RuleName();
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/add";
     }
 
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
+        // TO-DO: check data valid and save to db, after saving return RuleName list
         log.debug("validate");
-        return "ruleName/add";
+        if (result.hasErrors()) {
+            log.error("errors = " + result.getAllErrors());
+            return "ruleName/add";
+        }
+        ruleNameRepository.save(ruleName);
+        return "redirect:/ruleName/add";
     }
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+        // TO-DO: get RuleName by Id and to model then show to the form
         log.debug("showUpdateForm");
+        RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
+        model.addAttribute("ruleName", ruleName);
         return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+        // TO-DO: check required fields, if valid call service to update RuleName and return RuleName list
         log.debug("updateRuleName");
+        if (result.hasErrors()) {
+            log.error("errors = " + result.getAllErrors());
+            return "ruleName/update";
+        }
+        RuleName ruleNameToUpdate = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
+        ruleNameToUpdate.setName(ruleName.getName());
+        ruleNameToUpdate.setDescription(ruleName.getDescription());
+        ruleNameRepository.save(ruleNameToUpdate);
+        model.addAttribute("ruleNames", ruleNameRepository.findAll());
         return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+        // TO-DO: Find RuleName by Id and delete the RuleName, return to Rule list
         log.debug("deleteRuleName");
+        RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
+        ruleNameRepository.delete(ruleName);
+        model.addAttribute("ruleNames", ruleNameRepository.findAll());
         return "redirect:/ruleName/list";
     }
 }

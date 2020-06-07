@@ -14,9 +14,9 @@ public class Trade {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer TradeId;
-    @NotBlank
+    @NotBlank(message = "Please enter an account")
     private String account;
-    @NotBlank
+    @NotBlank(message = "Please enter a type")
     private String type;
     @Digits(integer=5, fraction=0)
     private Double buyQuantity;

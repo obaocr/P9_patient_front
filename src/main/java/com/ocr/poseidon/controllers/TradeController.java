@@ -1,8 +1,12 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.BidList;
 import com.ocr.poseidon.domain.Trade;
+import com.ocr.poseidon.repositories.BidListRepository;
+import com.ocr.poseidon.repositories.TradeRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,48 +22,73 @@ public class TradeController {
 
     private static final Logger log = LogManager.getLogger(TradeController.class);
 
-    // TODO: Inject Trade service
+    @Autowired
+    TradeRepository tradeRepository;
 
     @RequestMapping("/trade/list")
     public String home(Model model)
     {
-        // TODO: find all Trade, add to model
+        // TO-DO: find all Trade, add to model
         log.debug("home");
+        model.addAttribute("trades", tradeRepository.findAll());
         return "trade/list";
     }
 
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    // !!!! j'ai modifie et mis (Model model) avant il y avait (Trade trade) :
+    public String addUser(Model model) {
         log.debug("addUser");
+        Trade trade = new Trade();
+        model.addAttribute("trades", trade);
         return "trade/add";
     }
 
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
+        // TO-DO: check data valid and save to db, after saving return Trade list
         log.debug("validate");
-        return "trade/add";
+        if (result.hasErrors()) {
+            log.error("errors = " + result.getAllErrors());
+            return "trade/add";
+        }
+        tradeRepository.save(trade);
+        return "redirect:/trade/add";
     }
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+        // TO-DO: get Trade by Id and to model then show to the form
         log.debug("showUpdateForm");
+        Trade trade = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+        model.addAttribute("trade", trade);
         return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+        // TO-DO: check required fields, if valid call service to update Trade and return Trade list
         log.debug("updateTrade");
+        if (result.hasErrors()) {
+            log.error("errors = " + result.getAllErrors());
+            return "trade/update";
+        }
+        Trade tradeToUpdate = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+        tradeToUpdate.setAccount(trade.getAccount());
+        tradeToUpdate.setType(trade.getType());
+        tradeToUpdate.setBuyQuantity(trade.getBuyQuantity());
+        tradeRepository.save(tradeToUpdate);
+        model.addAttribute("bidLists", tradeRepository.findAll());
         return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        // TO-DO: Find Trade by Id and delete the Trade, return to Trade list
         log.debug("deleteTrade");
+        Trade trade = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
+        tradeRepository.delete(trade);
+        model.addAttribute("trades", tradeRepository.findAll());
         return "redirect:/trade/list";
     }
 }
