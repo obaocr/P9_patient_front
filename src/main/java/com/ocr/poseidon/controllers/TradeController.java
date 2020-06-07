@@ -35,7 +35,7 @@ public class TradeController {
     }
 
     @GetMapping("/trade/add")
-    // !!!! j'ai modifie et mis (Model model) avant il y avait (Trade trade) :
+    // !!!! j'ai modifie et mis (Model model) avant il y avait (Trade trade)
     public String addUser(Model model) {
         log.debug("addUser");
         Trade trade = new Trade();
