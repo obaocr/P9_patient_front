@@ -52,7 +52,7 @@ public class RatingController {
             return "rating/add";
         }
         ratingRepository.save(rating);
-        return "redirect:/rating/add";
+        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")

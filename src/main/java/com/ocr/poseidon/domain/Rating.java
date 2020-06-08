@@ -1,5 +1,6 @@
 package com.ocr.poseidon.domain;
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 
 @Entity
 @Table(name = "rating")
@@ -10,6 +11,7 @@ public class Rating {
     private String moodysRating;
     private String sandPRating;
     private String fitchRating;
+    @Digits(integer=5, fraction=0)
     private Integer orderNumber;
 
     public Rating() {

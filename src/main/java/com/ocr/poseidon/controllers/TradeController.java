@@ -52,7 +52,7 @@ public class TradeController {
             return "trade/add";
         }
         tradeRepository.save(trade);
-        return "redirect:/trade/add";
+        return "redirect:/trade/list";
     }
 
     @GetMapping("/trade/update/{id}")

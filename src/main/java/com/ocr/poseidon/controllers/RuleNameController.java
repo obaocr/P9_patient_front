@@ -52,7 +52,7 @@ public class RuleNameController {
             return "ruleName/add";
         }
         ruleNameRepository.save(ruleName);
-        return "redirect:/ruleName/add";
+        return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/update/{id}")
