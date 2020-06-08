@@ -11,8 +11,8 @@
 	<div class="row">
 		<div class="col-6">
 			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Point</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Rating</a>&nbsp;|&nbsp;
 			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
 			<a href="/ruleName/list">Rule</a>
 		</div>
@@ -38,6 +38,19 @@
 			</thead>
 			<tbody>
 			<!-- TODO: Show all CurvePoint to the table, the action column will have Edit & Delete buttons -->
+			<tr th:if="${curvePoints.empty}">
+				<td colspan="2"> No curvePoints Available </td>
+			</tr>
+			<tr th:each="curvePoint : ${curvePoints}">
+				<td><span th:text="${curvePoint.Id}"> Id </span></td>
+				<td><span th:text="${curvePoint.curveId}"> CurvePointId </span></td>
+				<td><span th:text="${curvePoint.term}"> Term </span></td>
+				<td><span th:text="${curvePoint.value}"> Value </span></td>
+				<td>
+					<a th:href="@{'/curvePoint/update/' + ${curvePoint.Id}}" > Update </a> |
+					<a th:href="@{'/curvePoint/delete/' + ${curvePoint.Id}}" > Delete </a>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>

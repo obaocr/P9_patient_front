@@ -11,8 +11,8 @@
 	<div class="row">
 		<div class="col-6">
 			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/curvePoint/list">Curve Point</a>&nbsp;|&nbsp;
+			<a href="/rating/list">Rating</a>&nbsp;|&nbsp;
 			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
 			<a href="/ruleName/list">Rule</a>
 		</div>
@@ -37,18 +37,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- TODO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
-				<tr th:if="${bidLists.empty}">
+				<!-- TO-DO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
+				<!--tr th:if="${bidlists.empty}">
 					<td colspan="2"> No bidlists Available </td>
-				</tr>
-				<tr th:each="bidlist : ${bidLists}">
-					<td><span th:text="${bidLists.bidListId}"> bidListId </span></td>
-					<td><span th:text="${bidLists.account}"> account </span></td>
-					<td><span th:text="${bidLists.type}"> type </span></td>
-					<td><span th:text="${bidLists.bidQuantity}"> bidQuantity </span></td>
+				</tr-->
+				<tr th:each="bidList : ${bidLists}">
+					<td><span th:text="${bidList.bidListId}"> bidListId </span></td>
+					<td><span th:text="${bidList.account}"> account </span></td>
+					<td><span th:text="${bidList.type}"> type </span></td>
+					<td><span th:text="${bidList.bidQuantity}"> bidQuantity </span></td>
 					<td>
-						<a th:href="@{'/bidList/update/' + ${bidLists.bidListId}}" > Update </a> |
-						<a th:href="@{'/bidList/delete/' + ${bidLists.bidListId}}" > Delete </a>
+						<a th:href="@{'/bidList/update/' + ${bidList.bidListId}}" > Update </a> |
+						<a th:href="@{'/bidList/delete/' + ${bidList.bidListId}}" > Delete </a>
 					</td>
 				</tr>
 			</tbody>

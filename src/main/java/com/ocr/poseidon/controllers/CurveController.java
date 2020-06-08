@@ -51,7 +51,7 @@ public class CurveController {
             return "curvePoint/add";
         }
         curvePointRepository.save(curvePoint);
-        return "redirect:/curvePoint/add";
+        return "redirect:/curvePoint/list";
     }
 
     @GetMapping("/curvePoint/update/{id}")

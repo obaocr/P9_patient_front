@@ -12,10 +12,11 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer Id;
+    @Digits(integer=5, fraction=0)
     private Integer curveId;
     @Basic
     private LocalDateTime asOfDate;
-    @Digits(integer=5, fraction=0)
+
     private Double term;
     @Digits(integer=5, fraction=0)
     private Double value;
