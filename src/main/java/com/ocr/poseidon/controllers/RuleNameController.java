@@ -1,8 +1,6 @@
 package com.ocr.poseidon.controllers;
 
-import com.ocr.poseidon.domain.BidList;
 import com.ocr.poseidon.domain.RuleName;
-import com.ocr.poseidon.repositories.BidListRepository;
 import com.ocr.poseidon.repositories.RuleNameRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,8 +24,7 @@ public class RuleNameController {
     RuleNameRepository ruleNameRepository;
 
     @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         // TO-DO: find all RuleName, add to model
         log.debug("home");
         model.addAttribute("ruleNames", ruleNameRepository.findAll());
@@ -66,7 +63,7 @@ public class RuleNameController {
 
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
-                             BindingResult result, Model model) {
+                                 BindingResult result, Model model) {
         // TO-DO: check required fields, if valid call service to update RuleName and return RuleName list
         log.debug("updateRuleName");
         if (result.hasErrors()) {
@@ -76,6 +73,10 @@ public class RuleNameController {
         RuleName ruleNameToUpdate = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
         ruleNameToUpdate.setName(ruleName.getName());
         ruleNameToUpdate.setDescription(ruleName.getDescription());
+        ruleNameToUpdate.setJson(ruleName.getJson());
+        ruleNameToUpdate.setTemplate(ruleName.getTemplate());
+        ruleNameToUpdate.setSqlPart(ruleName.getSqlPart());
+        ruleNameToUpdate.setSqlStr(ruleName.getSqlStr());
         ruleNameRepository.save(ruleNameToUpdate);
         model.addAttribute("ruleNames", ruleNameRepository.findAll());
         return "redirect:/ruleName/list";

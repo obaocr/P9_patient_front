@@ -36,10 +36,10 @@ public class TradeController {
 
     @GetMapping("/trade/add")
     // !!!! j'ai modifie et mis (Model model) avant il y avait (Trade trade)
-    public String addUser(Model model) {
-        log.debug("addUser");
+    public String addTrade(Model model) {
+        log.debug("addTrade");
         Trade trade = new Trade();
-        model.addAttribute("trades", trade);
+        model.addAttribute("trade", trade);
         return "trade/add";
     }
 
@@ -78,7 +78,7 @@ public class TradeController {
         tradeToUpdate.setType(trade.getType());
         tradeToUpdate.setBuyQuantity(trade.getBuyQuantity());
         tradeRepository.save(tradeToUpdate);
-        model.addAttribute("bidLists", tradeRepository.findAll());
+        model.addAttribute("trades", tradeRepository.findAll());
         return "redirect:/trade/list";
     }
 

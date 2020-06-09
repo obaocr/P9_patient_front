@@ -29,7 +29,7 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>Trade Id</th>
 					<th>Account</th>
 					<th>Type</th>
 					<th>Buy Quantity</th>
@@ -37,7 +37,20 @@
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all Trade to the table, the Action column will have Edit & Delete buttons -->
+			<!-- TO-DO: Show all Trade to the table, the Action column will have Edit & Delete buttons -->
+			<tr th:if="${trades.empty}">
+			<td colspan="2"> No bidlists Available </td>
+			</tr>
+			<tr th:each="trade : ${trades}">
+				<td><span th:text="${trade.TradeId}"> Trade Id </span></td>
+				<td><span th:text="${trade.account}"> Account </span></td>
+				<td><span th:text="${trade.type}"> Type </span></td>
+				<td><span th:text="${trade.buyQuantity}"> Buy Quantity </span></td>
+				<td>
+					<a th:href="@{'/trade/update/' + ${trade.TradeId}}" > Update </a> |
+					<a th:href="@{'/trade/delete/' + ${trade.TradeId}}" > Delete </a>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>

@@ -38,9 +38,9 @@
 			</thead>
 			<tbody>
 				<!-- TO-DO: Show all Bids to the table, the Action column will have Edit & Delete buttons -->
-				<!--tr th:if="${bidlists.empty}">
-					<td colspan="2"> No bidlists Available </td>
-				</tr-->
+				<tr th:if="${bidLists.empty}">
+					<td colspan="2"> No bidLists Available </td>
+				</tr>
 				<tr th:each="bidList : ${bidLists}">
 					<td><span th:text="${bidList.bidListId}"> bidListId </span></td>
 					<td><span th:text="${bidList.account}"> account </span></td>

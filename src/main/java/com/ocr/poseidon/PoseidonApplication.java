@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableEncryptableProperties
 public class PoseidonApplication {
 
-    // TODO annottaions Hibenate : https://docs.jboss.org/hibernate/validator/5.0/reference/en-US/html/chapter-bean-constraints.html#section-builtin-constraints
+    // TODO anotations Hibernate : https://docs.jboss.org/hibernate/validator/5.0/reference/en-US/html/chapter-bean-constraints.html#section-builtin-constraints
     // TODO Le mot de passe pour déchiffrer le mdp de la BDD devra être mis en dehors, par exemple dans une variable d' environnement
     // https://www.it-swarm.dev/fr/javascript/les-expressions-rationnelles-pour-mot-de-passe-doivent-contenir-au-moins-huit-caracteres-au-moins-un-chiffre-ainsi-que-des-lettres-majuscules-et-minuscules-et-des-caracteres-speciaux./1043325838/
     // TODO contole de surface pour saisie de numerique uniquement... ==> laissé en 0 pour le moment
@@ -20,7 +20,6 @@ public class PoseidonApplication {
     private static final Logger log = LogManager.getLogger(PoseidonApplication.class);
 
     public static void main(String[] args) {
-
         SpringApplication.run(PoseidonApplication.class, args);
     }
 }
