@@ -14,6 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer>, JpaSpecifi
     @Query(value = "select * from users where userName = :userName", nativeQuery = true)
     User findByUserName(@Param("userName") String userName);
 
-    // TODO A voir une autre méthode selon le nom par convention "findBy..." pour un seul critère => spring comprend et génère automatiquement.
+    // TO-DO A voir une autre méthode selon le nom par convention "findBy..." pour un seul critère => spring comprend et génère automatiquement.
     // Pour des requêtes plus complexes =>  voir une classe "criteria" pour spécifier les critères de recherche
 }

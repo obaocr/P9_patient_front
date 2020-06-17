@@ -69,6 +69,7 @@ public class BidListController {
         log.debug("updateBid");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
+            // TODO à voir si nécessaire bidList.setBidListId(id);
             return "bidList/update";
         }
         BidList bidListToUpdate = bidListRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid bidList Id:" + id));
