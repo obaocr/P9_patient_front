@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BidListController.class)
-class BidListControlerTest {
+class BidListControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -63,19 +63,21 @@ class BidListControlerTest {
                 .andDo(print())
                 .andExpect(view().name("bidList/list"))
                 .andExpect(status().isOk());
+
+        // Verify bidListRepository.findAll is called
+        verify(bidListRepository, Mockito.times(1)).findAll();
     }
 
     @Test
-    void AddWithoutParamShouldReturnView() throws Exception {
-        this.mockMvc.perform(post("/bidList/validate")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+    void GetForAddShouldReturnOK() throws Exception {
+        this.mockMvc.perform(get("/bidList/add")
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("bidList/add"))
                 .andExpect(status().isOk());
-        ;
     }
 
+    // TODO avec ou sans param c'est OK... bizarre
     @Test
     void AddWithBidlistShouldRedirect() throws Exception {
         // Inutile mais je laisse
@@ -89,7 +91,7 @@ class BidListControlerTest {
         this.mockMvc.perform(post("/bidList/validate")
                 .param("account","compte1")
                 .param("type","type1")
-                .param("bidQuantity","1.0")
+                //.param("bidQuantity","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
@@ -97,7 +99,16 @@ class BidListControlerTest {
 
         // Verify bidListRepository.save is called
         verify(bidListRepository, Mockito.times(1)).save(any());
+    }
 
+    @Test
+    void AddWithoutParamShouldReturnView() throws Exception {
+        this.mockMvc.perform(post("/bidList/validate")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
+                .andExpect(view().name("bidList/add"))
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -111,6 +122,7 @@ class BidListControlerTest {
                 .andExpect(status().isOk());
     }
 
+    // TODO Avec ou sans param ca marche ... le bodye st  null je pense...
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
         final String UPDATE_URL = "/bidList/update/" + "1";

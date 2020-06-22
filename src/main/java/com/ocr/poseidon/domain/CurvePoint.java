@@ -16,7 +16,7 @@ public class CurvePoint {
     private Integer curveId;
     @Basic
     private LocalDateTime asOfDate;
-
+    @Digits(integer=5, fraction=0)
     private Double term;
     @Digits(integer=5, fraction=0)
     private Double value;
