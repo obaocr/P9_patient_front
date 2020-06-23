@@ -5,6 +5,9 @@ import com.ocr.poseidon.repositories.BidListRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -21,6 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
 class BidlistControllerIntgTest {
 
     @Autowired
@@ -33,7 +37,7 @@ class BidlistControllerIntgTest {
 
     @BeforeEach
     @Test
-    @WithUserDetails("admin")
+    //@WithUserDetails("admin")
     void deleteAll() {
         bidListRepository.deleteAll();
     }

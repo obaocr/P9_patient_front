@@ -1,7 +1,12 @@
 package com.ocr.poseidon.controllers;
 
+// TODO tester l'inactivation de Spring Security avec :
+// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
+
 import com.ocr.poseidon.domain.BidList;
+import com.ocr.poseidon.domain.Trade;
 import com.ocr.poseidon.repositories.BidListRepository;
+import com.ocr.poseidon.repositories.TradeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -26,150 +31,150 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 // TODO tester l'inactivation de Spring Security avec :
 // @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(BidListController.class)
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
-class BidListControllerTest {
+@WebMvcTest(TradeController.class)
+public class TradeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private BidListRepository bidListRepository;
+    private TradeRepository tradeRepository;
 
     // Pour utiliser que ce bean dans un contexte avec spring security ... ça passe
     @Configuration
     static class ContextConfiguration {
         @Bean
-        public BidListController getBidListController() {
-            return new BidListController();
+        public TradeController getTradeController() {
+            return new TradeController();
         }
     }
 
     @Test
     void GetAllShouldReturnOK() throws Exception {
-        List<BidList> bidlists = new ArrayList<>();
-        BidList bid = new BidList();
-        bid.setBidListId(1);
-        bid.setAccount("Account");
-        bid.setType("Type");
-        bid.setBidQuantity(10.0);
-        bidlists.add(bid);
-        when(bidListRepository.findAll()).thenReturn(bidlists);
+        List<Trade> trades = new ArrayList<>();
+        Trade trade = new Trade();
+        trade.setTradeId(1);
+        trade.setAccount("Account");
+        trade.setType("Type");
+        trade.setBuyQuantity(10.0);
+        trades.add(trade);
+        when(tradeRepository.findAll()).thenReturn(trades);
 
-        this.mockMvc.perform(get("/bidList/list")
+        this.mockMvc.perform(get("/trade/list")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("bidList/list"))
+                .andExpect(view().name("trade/list"))
                 .andExpect(status().isOk());
 
         // Verify bidListRepository.findAll is called
-        verify(bidListRepository, Mockito.times(1)).findAll();
+        verify(tradeRepository, Mockito.times(1)).findAll();
     }
 
     @Test
     void GetForAddShouldReturnOK() throws Exception {
-        this.mockMvc.perform(get("/bidList/add")
+        this.mockMvc.perform(get("/trade/add")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("bidList/add"))
+                .andExpect(view().name("trade/add"))
                 .andExpect(status().isOk());
     }
 
     // TODO avec ou sans param c'est OK... bizarre
     @Test
-    void AddWithBidlistShouldRedirect() throws Exception {
+    void AddWithTradeShouldRedirect() throws Exception {
         // Inutile mais je laisse
-        BidList bid = new BidList();
-        bid.setBidListId(1);
-        bid.setAccount("compte1");
-        bid.setType("type1");
-        bid.setBidQuantity(1.0);
-        when(bidListRepository.save(any(BidList.class))).thenReturn(bid);
+        Trade trade = new Trade();
+        trade.setTradeId(1);
+        trade.setAccount("Account");
+        trade.setType("Type");
+        trade.setBuyQuantity(10.0);
+        when(tradeRepository.save(any(Trade.class))).thenReturn(trade);
 
-        this.mockMvc.perform(post("/bidList/validate")
+        this.mockMvc.perform(post("/trade/validate")
                 .param("account","compte1")
                 .param("type","type1")
-                //.param("bidQuantity","1.0")
+                //.param("buyQuantity","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/bidList/list"));
+                .andExpect(redirectedUrl("/trade/list"));
 
         // Verify bidListRepository.save is called
-        verify(bidListRepository, Mockito.times(1)).save(any());
+        verify(tradeRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     void AddWithoutParamShouldReturnView() throws Exception {
-        this.mockMvc.perform(post("/bidList/validate")
+        this.mockMvc.perform(post("/trade/validate")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("bidList/add"))
+                .andExpect(view().name("trade/add"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void UpdateWithoutParamShouldReturnView() throws Exception {
-        final String UPDATE_URL = "/bidList/update/" + "1";
+        final String UPDATE_URL = "/trade/update/" + "1";
         this.mockMvc.perform(post(UPDATE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("bidList/update"))
+                .andExpect(view().name("trade/update"))
                 .andExpect(status().isOk());
     }
 
     // TODO Avec ou sans param ca marche ... le bodye st  null je pense...
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
-        final String UPDATE_URL = "/bidList/update/" + "1";
+        final String UPDATE_URL = "/trade/update/" + "1";
 
-        BidList bid = new BidList();
-        bid.setBidListId(1);
-        bid.setAccount("Account");
-        bid.setType("Type");
-        bid.setBidQuantity(10.0);
-        when(bidListRepository.findById(any())).thenReturn(Optional.of(bid));
+        Trade trade = new Trade();
+        trade.setTradeId(1);
+        trade.setAccount("Account");
+        trade.setType("Type");
+        trade.setBuyQuantity(10.0);
+        when(tradeRepository.findById(any())).thenReturn(Optional.of(trade));
 
         this.mockMvc.perform(post(UPDATE_URL)
                 .param("account","compte1")
                 .param("type","type1")
-                .param("bidQuantity","1.0")
+                .param("buyQuantity","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/bidList/list"));
+                .andExpect(redirectedUrl("/trade/list"));
 
         // Verify bidListRepository.save is called
-        verify(bidListRepository, Mockito.times(1)).save(any());
+        verify(tradeRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     void DeleteWithParamShouldReturnRedirect() throws Exception {
-        final String DELETE_URL = "/bidList/delete/" + "1";
+        final String DELETE_URL = "/trade/delete/" + "1";
 
-        BidList bid = new BidList();
-        bid.setBidListId(1);
-        bid.setAccount("Account");
-        bid.setType("Type");
-        bid.setBidQuantity(10.0);
-        when(bidListRepository.findById(any())).thenReturn(Optional.of(bid));
+        Trade trade = new Trade();
+        trade.setTradeId(1);
+        trade.setAccount("Account");
+        trade.setType("Type");
+        trade.setBuyQuantity(10.0);
+        when(tradeRepository.findById(any())).thenReturn(Optional.of(trade));
 
         this.mockMvc.perform(get(DELETE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/bidList/list"));
+                .andExpect(redirectedUrl("/trade/list"));
 
         // Verify bidListRepository.save is called
-        verify(bidListRepository, Mockito.times(1)).delete(any());
+        verify(tradeRepository, Mockito.times(1)).delete(any());
     }
-}
 
+}
