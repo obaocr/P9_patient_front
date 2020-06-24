@@ -1,12 +1,7 @@
 package com.ocr.poseidon.controllers;
 
-// TODO tester l'inactivation de Spring Security avec :
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
-
-import com.ocr.poseidon.domain.BidList;
-import com.ocr.poseidon.domain.Trade;
-import com.ocr.poseidon.repositories.BidListRepository;
-import com.ocr.poseidon.repositories.TradeRepository;
+import com.ocr.poseidon.domain.RuleName;
+import com.ocr.poseidon.repositories.RuleNameRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -31,150 +26,163 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 // TODO tester l'inactivation de Spring Security avec :
 // @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(TradeController.class)
-public class TradeControllerTest {
+@WebMvcTest(RuleNameController.class)
+class RuleNameControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private TradeRepository tradeRepository;
+    private RuleNameRepository ruleNameRepository;
 
     // Pour utiliser que ce bean dans un contexte avec spring security ... ça passe
     @Configuration
     static class ContextConfiguration {
         @Bean
-        public TradeController getTradeController() {
-            return new TradeController();
+        public RuleNameController getRuleNameController() {
+            return new RuleNameController();
         }
     }
 
     @Test
     void GetAllShouldReturnOK() throws Exception {
-        List<Trade> trades = new ArrayList<>();
-        Trade trade = new Trade();
-        trade.setTradeId(1);
-        trade.setAccount("Account");
-        trade.setType("Type");
-        trade.setBuyQuantity(10.0);
-        trades.add(trade);
-        when(tradeRepository.findAll()).thenReturn(trades);
+        List<RuleName> ruleNames = new ArrayList<>();
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+        ruleName.setName("Name");
+        ruleName.setDescription("Desc");
+        ruleName.setTemplate("Template");
+        ruleName.setJson("Json");
+        ruleName.setSqlStr("SQL");
+        ruleNames.add(ruleName);
+        when(ruleNameRepository.findAll()).thenReturn(ruleNames);
 
-        this.mockMvc.perform(get("/trade/list")
+        this.mockMvc.perform(get("/ruleName/list")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("trade/list"))
+                .andExpect(view().name("ruleName/list"))
                 .andExpect(status().isOk());
 
         // Verify bidListRepository.findAll is called
-        verify(tradeRepository, Mockito.times(1)).findAll();
+        verify(ruleNameRepository, Mockito.times(1)).findAll();
     }
 
     @Test
     void GetForAddShouldReturnOK() throws Exception {
-        this.mockMvc.perform(get("/trade/add")
+        this.mockMvc.perform(get("/ruleName/add")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("trade/add"))
+                .andExpect(view().name("ruleName/add"))
                 .andExpect(status().isOk());
     }
 
     // TODO avec ou sans param c'est OK... bizarre
     @Test
-    void AddWithTradeShouldRedirect() throws Exception {
+    void AddWithRuleNameShouldRedirect() throws Exception {
         // Inutile mais je laisse
-        Trade trade = new Trade();
-        trade.setTradeId(1);
-        trade.setAccount("Account");
-        trade.setType("Type");
-        trade.setBuyQuantity(10.0);
-        when(tradeRepository.save(any(Trade.class))).thenReturn(trade);
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+        ruleName.setName("Name");
+        ruleName.setDescription("Desc");
+        ruleName.setTemplate("Template");
+        ruleName.setJson("Json");
+        ruleName.setSqlStr("SQL");
+        when(ruleNameRepository.save(any(RuleName.class))).thenReturn(ruleName);
 
-        this.mockMvc.perform(post("/trade/validate")
-                .param("account","compte1")
-                .param("type","type1")
-                //.param("buyQuantity","1.0")
+        this.mockMvc.perform(post("/ruleName/validate")
+                .param("name","compte1")
+                .param("description","type1")
+                .param("template","type1")
+                .param("json","type1")
+                .param("sqlStr","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(redirectedUrl("/ruleName/list"));
 
         // Verify bidListRepository.save is called
-        verify(tradeRepository, Mockito.times(1)).save(any());
+        verify(ruleNameRepository, Mockito.times(1)).save(any());
     }
 
+    // TODO KO !!
     @Test
     void AddWithoutParamShouldReturnView() throws Exception {
-        this.mockMvc.perform(post("/trade/validate")
+        this.mockMvc.perform(post("/ruleName/validate")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("trade/add"))
+                .andExpect(view().name("ruleName/add"))
                 .andExpect(status().isOk());
     }
 
+    // TODO KO !!! Invalid ruleName Id:1
     @Test
     void UpdateWithoutParamShouldReturnView() throws Exception {
-        final String UPDATE_URL = "/trade/update/" + "1";
+        final String UPDATE_URL = "/ruleName/update/" + "1";
         this.mockMvc.perform(post(UPDATE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("trade/update"))
+                .andExpect(view().name("ruleName/update"))
                 .andExpect(status().isOk());
     }
 
-    // TODO Avec ou sans param ca marche ... le body est null je pense...
+    // TODO toujours OK même si param en commentaire
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
-        final String UPDATE_URL = "/trade/update/" + "1";
+        final String UPDATE_URL = "/ruleName/update/" + "1";
 
-        Trade trade = new Trade();
-        trade.setTradeId(1);
-        trade.setAccount("Account");
-        trade.setType("Type");
-        trade.setBuyQuantity(10.0);
-        when(tradeRepository.findById(any())).thenReturn(Optional.of(trade));
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+        ruleName.setName("Name");
+        ruleName.setDescription("Desc");
+        ruleName.setTemplate("Template");
+        ruleName.setJson("Json");
+        ruleName.setSqlStr("SQL");
+        when(ruleNameRepository.findById(any())).thenReturn(Optional.of(ruleName));
 
         this.mockMvc.perform(post(UPDATE_URL)
-                .param("account","compte1")
-                .param("type","type1")
-                .param("buyQuantity","1.0")
+                .param("name","compte1")
+                //.param("description","type1")
+                .param("template","type1")
+                .param("json","type1")
+                .param("sqlStr","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(redirectedUrl("/ruleName/list"));
 
         // Verify bidListRepository.save is called
-        verify(tradeRepository, Mockito.times(1)).save(any());
+        verify(ruleNameRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     void DeleteWithParamShouldReturnRedirect() throws Exception {
-        final String DELETE_URL = "/trade/delete/" + "1";
+        final String DELETE_URL = "/ruleName/delete/" + "1";
 
-        Trade trade = new Trade();
-        trade.setTradeId(1);
-        trade.setAccount("Account");
-        trade.setType("Type");
-        trade.setBuyQuantity(10.0);
-        when(tradeRepository.findById(any())).thenReturn(Optional.of(trade));
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+        ruleName.setName("Name");
+        ruleName.setDescription("Desc");
+        ruleName.setTemplate("Template");
+        ruleName.setJson("Json");
+        ruleName.setSqlStr("SQL");
+        when(ruleNameRepository.findById(any())).thenReturn(Optional.of(ruleName));
 
         this.mockMvc.perform(get(DELETE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/trade/list"));
+                .andExpect(redirectedUrl("/ruleName/list"));
 
         // Verify bidListRepository.save is called
-        verify(tradeRepository, Mockito.times(1)).delete(any());
+        verify(ruleNameRepository, Mockito.times(1)).delete(any());
     }
 
 }
