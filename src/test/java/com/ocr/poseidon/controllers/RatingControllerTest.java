@@ -90,15 +90,16 @@ class RatingControllerTest {
         when(ratingRepository.save(any(Rating.class))).thenReturn(rating);
 
         this.mockMvc.perform(post("/rating/validate")
-                .param("account","compte1")
-                .param("type","type1")
-                //.param("bidQuantity","1.0")
+                .param("moodysRating","moodysRating")
+                .param("sandPRating","sandPRating")
+                .param("sandPRating","sandPRating")
+                .param("orderNumber","1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(redirectedUrl("/rating/list"));
 
-        // Verify rating.save is called
+        // Verify Repository.save is called
         verify(ratingRepository, Mockito.times(1)).save(any());
     }
 
@@ -123,8 +124,6 @@ class RatingControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO Avec ou sans param ca marche ... le bodye st  null je pense...
-
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
         final String UPDATE_URL = "/rating/update/" + "1";
@@ -138,9 +137,10 @@ class RatingControllerTest {
         when(ratingRepository.findById(any())).thenReturn(Optional.of(rating));
 
         this.mockMvc.perform(post(UPDATE_URL)
-                .param("account","compte1")
-                .param("type","type1")
-                .param("bidQuantity","1.0")
+                .param("moodysRating","moodysRating")
+                .param("sandPRating","sandPRating")
+                .param("sandPRating","sandPRating")
+                .param("orderNumber","1")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())

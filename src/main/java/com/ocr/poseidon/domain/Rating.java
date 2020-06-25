@@ -1,6 +1,7 @@
 package com.ocr.poseidon.domain;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "rating")
@@ -8,6 +9,7 @@ public class Rating {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer Id;
+    @NotBlank
     private String moodysRating;
     private String sandPRating;
     private String fitchRating;

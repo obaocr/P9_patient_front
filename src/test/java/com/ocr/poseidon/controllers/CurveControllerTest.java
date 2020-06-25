@@ -79,7 +79,6 @@ class CurveControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO  OK
     @Test
     void AddWithCurvePointShouldRedirect() throws Exception {
         // Inutile mais je laisse
@@ -102,7 +101,6 @@ class CurveControllerTest {
         verify(curvePointRepository, Mockito.times(1)).save(any());
     }
 
-    // TODO KO !!!! pourquoi ?, on a un redirect alors qu"on devrait avoir une view puisque une erreur en théorie...
     @Test
     void AddWithoutParamShouldReturnView() throws Exception {
         this.mockMvc.perform(post("/curvePoint/validate")
@@ -113,7 +111,6 @@ class CurveControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO KO !!!! pourquoi ?, on a un redirect alors qu"on devrait avoir une view puisque une erreur en théorie ...
     @Test
     void UpdateWithoutParamShouldReturnView() throws Exception {
         final String UPDATE_URL = "/curvePoint/update/" + "1";
@@ -125,7 +122,6 @@ class CurveControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO OK
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
         final String UPDATE_URL = "/curvePoint/update/" + "1";
@@ -148,7 +144,6 @@ class CurveControllerTest {
         verify(curvePointRepository, Mockito.times(1)).save(any());
     }
 
-    // TODO OK
     @Test
     void DeleteWithParamShouldReturnRedirect() throws Exception {
         final String DELETE_URL = "/curvePoint/delete/" + "1";

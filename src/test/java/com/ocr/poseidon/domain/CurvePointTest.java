@@ -46,6 +46,7 @@ class CurvePointTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         CurvePoint curvePoint = new CurvePoint();
+        curvePoint.setCurveId(1);
         curvePoint.setTerm(123456.0);
         Set<ConstraintViolation<CurvePoint>> constraintViolations = validator.validate( curvePoint );
         assertTrue(constraintViolations.size() == 1);
@@ -57,6 +58,7 @@ class CurvePointTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         CurvePoint curvePoint = new CurvePoint();
+        curvePoint.setCurveId(1);
         curvePoint.setValue(123456.0);
         Set<ConstraintViolation<CurvePoint>> constraintViolations = validator.validate( curvePoint );
         assertTrue(constraintViolations.size() == 1);

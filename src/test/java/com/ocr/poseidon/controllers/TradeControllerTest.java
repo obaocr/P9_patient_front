@@ -1,11 +1,6 @@
 package com.ocr.poseidon.controllers;
 
-// TODO tester l'inactivation de Spring Security avec :
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
-
-import com.ocr.poseidon.domain.BidList;
 import com.ocr.poseidon.domain.Trade;
-import com.ocr.poseidon.repositories.BidListRepository;
 import com.ocr.poseidon.repositories.TradeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,10 +26,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-
-// TODO tester l'inactivation de Spring Security avec :
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
@@ -131,7 +122,6 @@ public class TradeControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO Avec ou sans param ca marche ... le body est null je pense...
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
         final String UPDATE_URL = "/trade/update/" + "1";
@@ -152,7 +142,7 @@ public class TradeControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/trade/list"));
 
-        // Verify bidListRepository.save is called
+        // Verify Repository.save is called
         verify(tradeRepository, Mockito.times(1)).save(any());
     }
 

@@ -27,13 +27,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// TODO tester l'inactivation de Spring Security avec :
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
-
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BidListController.class)
-// @EnableAutoConfiguration(exclude = {SecurityFilterAutoConfiguration.class, SecurityAutoConfiguration.class})
+
 class BidListControllerTest {
 
     @Autowired
@@ -81,7 +78,6 @@ class BidListControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO avec ou sans param c'est OK... bizarre
     @Test
     void AddWithBidlistShouldRedirect() throws Exception {
         // Inutile mais je laisse
@@ -95,7 +91,7 @@ class BidListControllerTest {
         this.mockMvc.perform(post("/bidList/validate")
                 .param("account","compte1")
                 .param("type","type1")
-                //.param("bidQuantity","1.0")
+                .param("bidQuantity","1.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
@@ -126,7 +122,6 @@ class BidListControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO Avec ou sans param ca marche ... le bodye st  null je pense...
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
         final String UPDATE_URL = "/bidList/update/" + "1";

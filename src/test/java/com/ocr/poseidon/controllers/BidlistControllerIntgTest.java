@@ -37,7 +37,6 @@ class BidlistControllerIntgTest {
 
     @BeforeEach
     @Test
-    //@WithUserDetails("admin")
     void deleteAll() {
         bidListRepository.deleteAll();
     }
@@ -62,7 +61,6 @@ class BidlistControllerIntgTest {
     }
 
     // TODO .. KO, dans les logs on voit le body à NULL, pour le post ça devrait être dans le body...
-
     @Test
     @WithUserDetails("admin")
     void UpdateShouldReturnOK() throws Exception {

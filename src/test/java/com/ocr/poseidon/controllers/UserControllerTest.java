@@ -1,7 +1,7 @@
 package com.ocr.poseidon.controllers;
 
-import com.ocr.poseidon.domain.RuleName;
-import com.ocr.poseidon.repositories.RuleNameRepository;
+import com.ocr.poseidon.domain.User;
+import com.ocr.poseidon.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -29,153 +29,147 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(RuleNameController.class)
-class RuleNameControllerTest {
+@WebMvcTest(UserController.class)
+
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private RuleNameRepository ruleNameRepository;
+    private UserRepository userRepository;
 
     // Pour utiliser que ce bean dans un contexte avec spring security ... ça passe
     @Configuration
     static class ContextConfiguration {
         @Bean
-        public RuleNameController getRuleNameController() {
-            return new RuleNameController();
+        public UserController getUserController() {
+            return new UserController();
         }
     }
 
     @Test
     void GetAllShouldReturnOK() throws Exception {
-        List<RuleName> ruleNames = new ArrayList<>();
-        RuleName ruleName = new RuleName();
-        ruleName.setId(1);
-        ruleName.setName("Name");
-        ruleName.setDescription("Desc");
-        ruleName.setTemplate("Template");
-        ruleName.setJson("Json");
-        ruleName.setSqlStr("SQL");
-        ruleNames.add(ruleName);
-        when(ruleNameRepository.findAll()).thenReturn(ruleNames);
+        List<User> users = new ArrayList<>();
+        User user = new User();
+        user.setId(1);
+        user.setFullname("fullname");
+        user.setUsername("username");
+        user.setPassword("Passwo8!");
+        user.setRole("USER");
+        users.add(user);
+        when(userRepository.findAll()).thenReturn(users);
 
-        this.mockMvc.perform(get("/ruleName/list")
+        this.mockMvc.perform(get("/user/list")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("ruleName/list"))
+                .andExpect(view().name("user/list"))
                 .andExpect(status().isOk());
 
-        // Verify Repository.findAll is called
-        verify(ruleNameRepository, Mockito.times(1)).findAll();
+        // Verify bidListRepository.findAll is called
+        verify(userRepository, Mockito.times(1)).findAll();
     }
 
     @Test
     void GetForAddShouldReturnOK() throws Exception {
-        this.mockMvc.perform(get("/ruleName/add")
+        this.mockMvc.perform(get("/user/add")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("ruleName/add"))
+                .andExpect(view().name("user/add"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void AddWithRuleNameShouldRedirect() throws Exception {
+    void AddWithUserShouldRedirect() throws Exception {
         // Inutile mais je laisse
-        RuleName ruleName = new RuleName();
-        ruleName.setId(1);
-        ruleName.setName("Name");
-        ruleName.setDescription("Desc");
-        ruleName.setTemplate("Template");
-        ruleName.setJson("Json");
-        ruleName.setSqlStr("SQL");
-        when(ruleNameRepository.save(any(RuleName.class))).thenReturn(ruleName);
+        User user = new User();
+        user.setId(1);
+        user.setFullname("fullname");
+        user.setUsername("username");
+        user.setPassword("Passwo8!");
+        user.setRole("USER");
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
-        this.mockMvc.perform(post("/ruleName/validate")
-                .param("name","compte1")
-                .param("description","type1")
-                .param("template","type1")
-                .param("json","type1")
-                .param("sqlStr","sql")
+        this.mockMvc.perform(post("/user/validate")
+                .param("fullname", "Fullname")
+                .param("username", "Username")
+                .param("password", "Passwo8!")
+                .param("role", "USER")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/ruleName/list"));
+                .andExpect(redirectedUrl("/user/list"));
 
-        // Verify bidListRepository.save is called
-        verify(ruleNameRepository, Mockito.times(1)).save(any());
+        // Verify Repository.save is called
+        verify(userRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     void AddWithoutParamShouldReturnView() throws Exception {
-        this.mockMvc.perform(post("/ruleName/validate")
+        this.mockMvc.perform(post("/user/validate")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("ruleName/add"))
+                .andExpect(view().name("user/add"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void UpdateWithoutParamShouldReturnView() throws Exception {
-        final String UPDATE_URL = "/ruleName/update/" + "1";
+        final String UPDATE_URL = "/user/update/" + "1";
         this.mockMvc.perform(post(UPDATE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(view().name("ruleName/update"))
+                .andExpect(view().name("user/update"))
                 .andExpect(status().isOk());
     }
 
     @Test
     void UpdateWithParamShouldReturnRedirect() throws Exception {
-        final String UPDATE_URL = "/ruleName/update/" + "1";
+        final String UPDATE_URL = "/user/update/" + "1";
 
-        RuleName ruleName = new RuleName();
-        ruleName.setId(1);
-        ruleName.setName("Name");
-        ruleName.setDescription("Desc");
-        ruleName.setTemplate("Template");
-        ruleName.setJson("Json");
-        ruleName.setSqlStr("SQL");
-        when(ruleNameRepository.findById(any())).thenReturn(Optional.of(ruleName));
+        User user = new User();
+        user.setId(1);
+        user.setFullname("fullname");
+        user.setUsername("Username");
+        user.setPassword("Passwo8!");
+        user.setRole("USER");
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
 
         this.mockMvc.perform(post(UPDATE_URL)
-                .param("name","compte1")
-                //.param("description","type1")
-                .param("template","type1")
-                .param("json","type1")
-                .param("sqlStr","sql")
+                .param("fullname", "Fullname")
+                .param("username", "Username")
+                .param("password", "Passwo8!")
+                .param("role", "USER")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/ruleName/list"));
+                .andExpect(redirectedUrl("/user/list"));
 
         // Verify bidListRepository.save is called
-        verify(ruleNameRepository, Mockito.times(1)).save(any());
+        verify(userRepository, Mockito.times(1)).save(any());
     }
 
     @Test
     void DeleteWithParamShouldReturnRedirect() throws Exception {
-        final String DELETE_URL = "/ruleName/delete/" + "1";
+        final String DELETE_URL = "/user/delete/" + "1";
 
-        RuleName ruleName = new RuleName();
-        ruleName.setId(1);
-        ruleName.setName("Name");
-        ruleName.setDescription("Desc");
-        ruleName.setTemplate("Template");
-        ruleName.setJson("Json");
-        ruleName.setSqlStr("SQL");
-        when(ruleNameRepository.findById(any())).thenReturn(Optional.of(ruleName));
+        User user = new User();
+        user.setId(1);
+        user.setFullname("fullname");
+        user.setUsername("Username");
+        user.setPassword("Passwo8!");
+        user.setRole("USER");
+        when(userRepository.findById(any())).thenReturn(Optional.of(user));
 
         this.mockMvc.perform(get(DELETE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/ruleName/list"));
+                .andExpect(redirectedUrl("/user/list"));
 
         // Verify bidListRepository.save is called
-        verify(ruleNameRepository, Mockito.times(1)).delete(any());
+        verify(userRepository, Mockito.times(1)).delete(any());
     }
-
 }

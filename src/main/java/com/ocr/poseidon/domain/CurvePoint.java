@@ -2,6 +2,8 @@ package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ public class CurvePoint {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer Id;
+    @NotNull
     @Digits(integer=5, fraction=0)
     private Integer curveId;
     @Basic
