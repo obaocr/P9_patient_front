@@ -4,9 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Class for model Trade
+ */
 
 @Entity
 @Table(name = "trade")
@@ -57,7 +59,7 @@ public class Trade {
     }
 
     public void setTradeId(Integer tradeId) {
-        this.TradeId = TradeId;
+        this.TradeId = tradeId;
     }
 
     public String getAccount() {

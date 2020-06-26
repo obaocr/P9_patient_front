@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * Class RatingController for Rating
+ */
+
 @Controller
 public class RatingController {
 

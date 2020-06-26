@@ -1,5 +1,6 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.RuleName;
 import com.ocr.poseidon.domain.Trade;
 import com.ocr.poseidon.repositories.TradeRepository;
 import org.junit.jupiter.api.Test;
@@ -108,6 +109,23 @@ public class TradeControllerTest {
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("trade/add"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void GetUpdateShouldReturnOK() throws Exception {
+        final String UPDATE_URL = "/trade/update/" + "1";
+        Trade trade = new Trade();
+        trade.setTradeId(1);
+        trade.setAccount("Account");
+        trade.setType("Type");
+        trade.setBuyQuantity(10.0);
+        when(tradeRepository.findById(1)).thenReturn(Optional.of(trade));
+
+        this.mockMvc.perform(get(UPDATE_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 

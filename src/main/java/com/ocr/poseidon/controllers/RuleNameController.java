@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * Class RuleNameController for RuleName
+ */
+
 @Controller
 public class RuleNameController {
 

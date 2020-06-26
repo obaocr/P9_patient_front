@@ -1,5 +1,6 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.Rating;
 import com.ocr.poseidon.domain.RuleName;
 import com.ocr.poseidon.repositories.RuleNameRepository;
 import org.junit.jupiter.api.Test;
@@ -113,6 +114,25 @@ class RuleNameControllerTest {
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("ruleName/add"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void GetUpdateShouldReturnOK() throws Exception {
+        final String UPDATE_URL = "/ruleName/update/" + "1";
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+        ruleName.setName("Name");
+        ruleName.setDescription("Desc");
+        ruleName.setTemplate("Template");
+        ruleName.setJson("Json");
+        ruleName.setSqlStr("SQL");
+        when(ruleNameRepository.findById(1)).thenReturn(Optional.of(ruleName));
+
+        this.mockMvc.perform(get(UPDATE_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 

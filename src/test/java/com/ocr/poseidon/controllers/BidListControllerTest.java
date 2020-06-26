@@ -30,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(BidListController.class)
-
 class BidListControllerTest {
 
     @Autowired
@@ -108,6 +107,23 @@ class BidListControllerTest {
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("bidList/add"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void GetUpdateShouldReturnOK() throws Exception {
+        final String UPDATE_URL = "/bidList/update/" + "1";
+        BidList bid = new BidList();
+        bid.setBidListId(1);
+        bid.setAccount("Account");
+        bid.setType("Type");
+        bid.setBidQuantity(10.0);
+        when(bidListRepository.findById(1)).thenReturn(Optional.of(bid));
+
+        this.mockMvc.perform(get(UPDATE_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 

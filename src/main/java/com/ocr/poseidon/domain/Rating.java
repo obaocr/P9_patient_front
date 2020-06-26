@@ -3,6 +3,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Class for model Rating
+ */
+
 @Entity
 @Table(name = "rating")
 public class Rating {
@@ -31,7 +35,7 @@ public class Rating {
     }
 
     public void setId(Integer id) {
-        this.Id = Id;
+        this.Id = id;
     }
 
     public String getMoodysRating() {

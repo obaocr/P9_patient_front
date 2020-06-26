@@ -1,5 +1,6 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.BidList;
 import com.ocr.poseidon.domain.CurvePoint;
 import com.ocr.poseidon.repositories.CurvePointRepository;
 import org.junit.jupiter.api.Test;
@@ -108,6 +109,23 @@ class CurveControllerTest {
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("curvePoint/add"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void GetUpdateShouldReturnOK() throws Exception {
+        final String UPDATE_URL = "/curvePoint/update/" + "1";
+        CurvePoint curvePoint = new CurvePoint();
+        curvePoint.setId(1);
+        curvePoint.setCurveId(5);
+        curvePoint.setTerm(10.0);
+        curvePoint.setValue(10.0);
+        when(curvePointRepository.findById(1)).thenReturn(Optional.of(curvePoint));
+
+        this.mockMvc.perform(get(UPDATE_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 

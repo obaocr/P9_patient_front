@@ -2,11 +2,12 @@ package com.ocr.poseidon.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * Class for model CurvePoint
+ */
 
 @Entity
 @Table(name = "curvepoint")
@@ -40,7 +41,7 @@ public class CurvePoint {
     }
 
     public void setId(Integer id) {
-        this.Id = Id;
+        this.Id = id;
     }
 
     public Integer getCurveId() {

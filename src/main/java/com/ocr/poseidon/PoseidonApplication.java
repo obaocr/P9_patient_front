@@ -6,20 +6,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Application PoseidonApplication
+ */
+
 @SpringBootApplication
 @EnableEncryptableProperties
 public class PoseidonApplication {
 
-    // TODO anotations Hibernate : https://docs.jboss.org/hibernate/validator/5.0/reference/en-US/html/chapter-bean-constraints.html#section-builtin-constraints
-    // TODO Le mot de passe pour déchiffrer le mdp de la BDD devra être mis en dehors, par exemple dans une variable d' environnement
+    // MDP Test !: 123456
+    // anotations Hibernate : https://docs.jboss.org/hibernate/validator/5.0/reference/en-US/html/chapter-bean-constraints.html#section-builtin-constraints
     // https://www.it-swarm.dev/fr/javascript/les-expressions-rationnelles-pour-mot-de-passe-doivent-contenir-au-moins-huit-caracteres-au-moins-un-chiffre-ainsi-que-des-lettres-majuscules-et-minuscules-et-des-caracteres-speciaux./1043325838/
-    // TODO JAVADOC
-    // TODO README
-    // TODO tests : tests INTG, tests INTG user, Tests KO à voir ou tests sans PARAM qui sont OK !?s
-    // TODO quel reste à faire pour la soutenance
-    // TODO en cas d'erreur 2 fois ça crash ... champs Hidden à mettre ?
-    // TODO méthode de "Lucas" pour bypasser la sécurité dans les test ?
-
     private static final Logger log = LogManager.getLogger(PoseidonApplication.class);
 
     public static void main(String[] args) {

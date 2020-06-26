@@ -1,5 +1,6 @@
 package com.ocr.poseidon.controllers;
 
+import com.ocr.poseidon.domain.CurvePoint;
 import com.ocr.poseidon.domain.Rating;
 import com.ocr.poseidon.repositories.RatingRepository;
 import org.junit.jupiter.api.Test;
@@ -110,6 +111,24 @@ class RatingControllerTest {
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(view().name("rating/add"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void GetUpdateShouldReturnOK() throws Exception {
+        final String UPDATE_URL = "/rating/update/" + "1";
+        Rating rating = new Rating();
+        rating.setId(1);
+        rating.setMoodysRating("OK");
+        rating.setSandPRating("OK");
+        rating.setFitchRating("OK");
+        rating.setOrderNumber(1);
+        when(ratingRepository.findById(1)).thenReturn(Optional.of(rating));
+
+        this.mockMvc.perform(get(UPDATE_URL)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .characterEncoding("utf-8"))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 

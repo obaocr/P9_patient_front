@@ -6,6 +6,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ * Class for model BidList
+ */
+
 @Entity
 @Table(name = "bidlist")
 public class BidList {
@@ -58,7 +62,7 @@ public class BidList {
     }
 
     public void setBidListId(Integer bidListId) {
-        this.bidListId = this.bidListId;
+        this.bidListId = bidListId;
     }
 
     public String getAccount() {

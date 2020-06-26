@@ -44,13 +44,27 @@ class BidListTest {
         bidList.setDealName("DealName");
         bidList.setDealType("DealType");
         bidList.setRevisionDate(now);
-        bidList.setRevisionName("evisionName");
+        bidList.setRevisionName("RevisionName");
         bidList.setSecurity("High");
         bidList.setSide("Side");
-        bidList.setSourceListId("");
+        bidList.setSourceListId("A");
         bidList.setStatus("Open");
         bidList.setTrader("John");
         assertTrue(bidList.getType().equals("Type"));
+        assertTrue(bidList.getAccount().equals("Account"));
+        assertTrue(bidList.getAsk().equals(1.0));
+        assertTrue(bidList.getAskQuantity().equals(1.0));
+        assertTrue(bidList.getBenchmark().equals("Benchmark"));
+        assertTrue(bidList.getBook().equals("Book"));
+        assertTrue(bidList.getCommentary().equals("Commentary"));
+        assertTrue(bidList.getDealName().equals("DealName"));
+        assertTrue(bidList.getDealType().equals("DealType"));
+        assertTrue(bidList.getRevisionName().equals("RevisionName"));
+        assertTrue(bidList.getSecurity().equals("High"));
+        assertTrue(bidList.getSide().equals("Side"));
+        assertTrue(bidList.getSourceListId().equals("A"));
+        assertTrue(bidList.getStatus().equals("Open"));
+        assertTrue(bidList.getTrader().equals("John"));
         assertTrue(bidList.getBidListDate() == now);
     }
 

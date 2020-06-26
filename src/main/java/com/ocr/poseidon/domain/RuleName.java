@@ -3,6 +3,11 @@ package com.ocr.poseidon.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Class for model RuleName
+ */
+
+
 @Entity
 @Table(name = "rulename")
 public class RuleName {

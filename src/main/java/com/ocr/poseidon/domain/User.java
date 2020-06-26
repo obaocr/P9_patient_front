@@ -4,6 +4,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+/**
+ * Class for model User
+ */
+
 @Entity
 @Table(name = "users")
 public class User {

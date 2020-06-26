@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/**
+ * Class BidListController for Bidlist
+ */
 
 @Controller
 public class BidListController {

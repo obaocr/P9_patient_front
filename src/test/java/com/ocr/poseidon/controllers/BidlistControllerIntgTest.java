@@ -14,9 +14,11 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,7 +35,7 @@ class BidlistControllerIntgTest {
     @Autowired
     private BidListRepository bidListRepository;
 
-    // Exemple pour tests mockmvc pring MVC https://modernjava.io/testing-spring-mvc-mockmvc/
+    // Exemple pour tests mockmvc Spring MVC https://modernjava.io/testing-spring-mvc-mockmvc/
 
     @BeforeEach
     @Test
@@ -60,27 +62,33 @@ class BidlistControllerIntgTest {
                 .andExpect(model().size(1));
     }
 
-    // TODO .. KO, dans les logs on voit le body à NULL, pour le post ça devrait être dans le body...
     @Test
     @WithUserDetails("admin")
     void UpdateShouldReturnOK() throws Exception {
-        final String UPDATE_URL = "/bidList/update/" + "1";
 
         BidList bid = new BidList();
-        bid.setBidListId(1);
         bid.setAccount("Account");
         bid.setType("Type");
         bid.setBidQuantity(10.0);
         bidListRepository.save(bid);
 
+        List<BidList> bidLists = new ArrayList<>();
+        bidLists = bidListRepository.findAll();
+        bid = bidLists.get(0);
+        String UPDATE_URL = "/bidList/update/" + bid.getBidListId();
+
         this.mockMvc.perform(post(UPDATE_URL)
-                .param("account","compte1")
-                .param("type","type1")
-                .param("bidQuantity","1.0")
+                .with(csrf())
+                .param("account","Account-UPDATED")
+                .param("type","Type")
+                .param("bidQuantity","10.0")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .characterEncoding("utf-8"))
                 .andDo(print())
                 .andExpect(redirectedUrl("/bidList/list"));
+
+        BidList bidUpdated =  bidListRepository.findAll().get(0);
+        assertTrue(bidUpdated.getAccount().equals("Account-UPDATED"));
     }
 
     @Test
