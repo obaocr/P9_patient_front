@@ -32,7 +32,7 @@ public class User {
     }
 
     public void setId(Integer id) {
-        this.Id = Id;
+        this.Id = id;
     }
 
     public String getUsername() {
