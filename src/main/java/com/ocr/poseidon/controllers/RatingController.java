@@ -29,49 +29,75 @@ public class RatingController {
     @Autowired
     RatingRepository ratingRepository;
 
+    /**
+     * Endpoint for rating list
+     * @param model
+     * @return rating list
+     */
     @RequestMapping("/rating/list")
     public String home(Model model)
     {
-        // TO-DO: find all Rating, add to model
         log.debug("home");
         model.addAttribute("ratings", ratingRepository.findAll());
+        log.info("ratings displayed");
         return "rating/list";
     }
 
+    /**
+     * Endpoint to display Rating add IHM
+     * @param model
+     */
     @GetMapping("/rating/add")
-    // !!!! j'ai modifie et mis (Model model) avant il y avait (Rating rating) :
     public String addRatingForm(Model model) {
         log.debug("addRatingForm");
         Rating rating = new Rating();
         model.addAttribute("rating", rating);
+        log.info("rating get for add");
         return "rating/add";
     }
 
+    /**
+     * Endpoint to validate for adding Rating
+     * @param rating Rating object to be added
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TO-DO: check data valid and save to db, after saving return Rating list
         log.debug("validate");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
             return "rating/add";
         }
         ratingRepository.save(rating);
+        log.info("rating validated for add");
         return "redirect:/rating/list";
     }
 
+    /**
+     * Endpoint to display Rating updating form
+     * @param id Rating id to be updated
+     * @param model
+     */
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: get Rating by Id and to model then show to the form
         log.debug("showUpdateForm");
         Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
         model.addAttribute("rating", rating);
+        log.info("rating get for update");
         return "rating/update";
     }
 
+    /**
+     * Endpoint to validate for update
+     * @param id is the Rating id
+     * @param rating is the Rating object to be updated
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                              BindingResult result, Model model) {
-        // TO-DO: check required fields, if valid call service to update Rating and return Rating list
         log.debug("updateRating");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
@@ -84,9 +110,15 @@ public class RatingController {
         ratingToUpdate.setSandPRating(rating.getSandPRating());
         ratingRepository.save(ratingToUpdate);
         model.addAttribute("ratings", ratingRepository.findAll());
+        log.info("rating updated");
         return "redirect:/rating/list";
     }
 
+    /**
+     * Endpoint to delete a Rating object
+     * @param id is the Rating id
+     * @param model
+     */
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         // TO-DO: Find Rating by Id and delete the Rating, return to Rating list
@@ -94,6 +126,7 @@ public class RatingController {
         Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
         ratingRepository.delete(rating);
         model.addAttribute("ratings", ratingRepository.findAll());
+        log.info("rating deleted");
         return "redirect:/rating/list";
     }
 }

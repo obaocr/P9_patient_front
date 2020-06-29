@@ -26,6 +26,19 @@ class UserTest {
      }
 
     @Test
+    void TradeTestPasswordShouldReturnOK () {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        User user = new User();
+        user.setUsername("user1");
+        user.setFullname("utilisateur1");
+        user.setRole("User");
+        user.setPassword("Parach1!");
+        Set<ConstraintViolation<User>> constraintViolations = validator.validate( user );
+        assertTrue(constraintViolations.size() == 0);
+    }
+
+    @Test
     void TradeTestPasswordShouldReturnKO () {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();

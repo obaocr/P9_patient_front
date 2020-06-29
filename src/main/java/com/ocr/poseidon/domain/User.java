@@ -15,13 +15,16 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer Id;
     @NotBlank(message = "Username is mandatory")
+    @Column(length = 125)
     private String username;
     @NotBlank(message = "Password is mandatory")
     @Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", message = "Password must be >= 8 characters, 1 UpperCase, 1 symbol, 1 digit")
     private String password;
     @NotBlank(message = "FullName is mandatory")
+    @Column(length = 125)
     private String fullname;
     @NotBlank(message = "Role is mandatory")
+    @Column(length = 125)
     private String role;
 
     public User() {

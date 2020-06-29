@@ -14,9 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableEncryptableProperties
 public class PoseidonApplication {
 
-    // MDP Test !: 123456
-    // anotations Hibernate : https://docs.jboss.org/hibernate/validator/5.0/reference/en-US/html/chapter-bean-constraints.html#section-builtin-constraints
-    // https://www.it-swarm.dev/fr/javascript/les-expressions-rationnelles-pour-mot-de-passe-doivent-contenir-au-moins-huit-caracteres-au-moins-un-chiffre-ainsi-que-des-lettres-majuscules-et-minuscules-et-des-caracteres-speciaux./1043325838/
     private static final Logger log = LogManager.getLogger(PoseidonApplication.class);
 
     public static void main(String[] args) {

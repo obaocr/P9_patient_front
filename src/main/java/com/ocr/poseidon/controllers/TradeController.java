@@ -29,49 +29,75 @@ public class TradeController {
     @Autowired
     TradeRepository tradeRepository;
 
+    /**
+     * Endpoint for trade list
+     * @param model
+     * @return trade list
+     */
     @RequestMapping("/trade/list")
     public String home(Model model)
     {
-        // TO-DO: find all Trade, add to model
         log.debug("home");
         model.addAttribute("trades", tradeRepository.findAll());
+        log.info("trades displayed");
         return "trade/list";
     }
 
+    /**
+     * Endpoint to display Trade add IHM
+     * @param model
+     */
     @GetMapping("/trade/add")
-    // !!!! j'ai modifie et mis (Model model) avant il y avait (Trade trade)
     public String addTrade(Model model) {
         log.debug("addTrade");
         Trade trade = new Trade();
         model.addAttribute("trade", trade);
+        log.info("trades get for add");
         return "trade/add";
     }
 
+    /**
+     * Endpoint to validate for adding Trade
+     * @param trade Trade object to be added
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/trade/validate")
     public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TO-DO: check data valid and save to db, after saving return Trade list
         log.debug("validate");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
             return "trade/add";
         }
         tradeRepository.save(trade);
+        log.info("trades valmidated for add");
         return "redirect:/trade/list";
     }
 
+    /**
+     * Endpoint to display Trade updating form
+     * @param id Trade id to be updated
+     * @param model
+     */
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: get Trade by Id and to model then show to the form
         log.debug("showUpdateForm");
         Trade trade = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
         model.addAttribute("trade", trade);
+        log.info("trades get for update");
         return "trade/update";
     }
 
+    /**
+     * Endpoint to validate for update
+     * @param id is the Trade id
+     * @param trade is the Trade object to be updated
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                              BindingResult result, Model model) {
-        // TO-DO: check required fields, if valid call service to update Trade and return Trade list
         log.debug("updateTrade");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
@@ -83,16 +109,22 @@ public class TradeController {
         tradeToUpdate.setBuyQuantity(trade.getBuyQuantity());
         tradeRepository.save(tradeToUpdate);
         model.addAttribute("trades", tradeRepository.findAll());
+        log.info("trades updated");
         return "redirect:/trade/list";
     }
 
+    /**
+     * Endpoint to delete a Trade object
+     * @param id is the Trade id
+     * @param model
+     */
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: Find Trade by Id and delete the Trade, return to Trade list
         log.debug("deleteTrade");
         Trade trade = tradeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
         tradeRepository.delete(trade);
         model.addAttribute("trades", tradeRepository.findAll());
+        log.info("trades deleted");
         return "redirect:/trade/list";
     }
 }

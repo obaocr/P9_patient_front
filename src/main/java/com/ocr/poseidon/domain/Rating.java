@@ -14,8 +14,11 @@ public class Rating {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer Id;
     @NotBlank
+    @Column(length = 125)
     private String moodysRating;
+    @Column(length = 125)
     private String sandPRating;
+    @Column(length = 125)
     private String fitchRating;
     @Digits(integer=5, fraction=0)
     private Integer orderNumber;

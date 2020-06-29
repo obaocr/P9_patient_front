@@ -18,7 +18,9 @@ public class BidList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bidListId;
     @NotBlank(message = "Please enter an account")
+    @Column(length = 30)
     private String account;
+    @Column(length = 30)
     @NotBlank(message = "Please enter an type")
     private String type;
     @Digits(integer = 5, fraction = 0)
@@ -32,20 +34,31 @@ public class BidList {
     private String benchmark;
     @Basic
     private LocalDateTime bidListDate;
+    @Column(length = 125)
     private String commentary;
+    @Column(length = 125)
     private String security;
+    @Column(length = 10)
     private String status;
+    @Column(length = 125)
     private String trader;
+    @Column(length = 125)
     private String book;
+    @Column(length = 125)
     private String creationName;
     @Basic
     private LocalDateTime creationDate;
+    @Column(length = 125)
     private String revisionName;
     @Basic
     private LocalDateTime revisionDate;
+    @Column(length = 125)
     private String dealName;
+    @Column(length = 125)
     private String dealType;
+    @Column(length = 125)
     private String sourceListId;
+    @Column(length = 125)
     private String side;
 
     public BidList() {

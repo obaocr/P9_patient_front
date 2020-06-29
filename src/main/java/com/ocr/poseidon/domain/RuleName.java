@@ -15,11 +15,17 @@ public class RuleName {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer Id;
     @NotBlank
+    @Column(length = 125)
     private String name;
+    @Column(length = 125)
     private String description;
+    @Column(length = 125)
     private String json;
+    @Column(length = 512)
     private String template;
+    @Column(length = 125)
     private String sqlStr;
+    @Column(length = 125)
     private String sqlPart;
 
     public RuleName() {

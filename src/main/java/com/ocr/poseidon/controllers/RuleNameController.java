@@ -27,48 +27,74 @@ public class RuleNameController {
     @Autowired
     RuleNameRepository ruleNameRepository;
 
+    /**
+     * Endpoint for ruleName list
+     * @param model
+     * @return ruleName list
+     */
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
-        // TO-DO: find all RuleName, add to model
         log.debug("home");
         model.addAttribute("ruleNames", ruleNameRepository.findAll());
+        log.info("ruleNames displayed");
         return "ruleName/list";
     }
 
+    /**
+     * Endpoint to display RuleName add IHM
+     * @param model
+     */
     @GetMapping("/ruleName/add")
-    // !!!! j'ai modifie et mis (Model model) avant il y avait (RuleName bid) :
     public String addRuleForm(Model model) {
         log.debug("addRuleForm");
         RuleName ruleName = new RuleName();
         model.addAttribute("ruleName", ruleName);
+        log.info("ruleNames get for add");
         return "ruleName/add";
     }
 
+    /**
+     * Endpoint to validate for adding RuleName
+     * @param ruleName RuleName object to be added
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        // TO-DO: check data valid and save to db, after saving return RuleName list
         log.debug("validate");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
             return "ruleName/add";
         }
         ruleNameRepository.save(ruleName);
+        log.info("ruleNames validated for add");
         return "redirect:/ruleName/list";
     }
 
+    /**
+     * Endpoint to display RuleName updating form
+     * @param id RuleName id to be updated
+     * @param model
+     */
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: get RuleName by Id and to model then show to the form
         log.debug("showUpdateForm");
         RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
         model.addAttribute("ruleName", ruleName);
+        log.info("ruleNames get for update");
         return "ruleName/update";
     }
 
+    /**
+     * Endpoint to validate for update
+     * @param id is the RuleName id
+     * @param ruleName is the RuleName object to be updated
+     * @param result technical result
+     * @param model
+     */
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model) {
-        // TO-DO: check required fields, if valid call service to update RuleName and return RuleName list
         log.debug("updateRuleName");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
@@ -83,16 +109,22 @@ public class RuleNameController {
         ruleNameToUpdate.setSqlStr(ruleName.getSqlStr());
         ruleNameRepository.save(ruleNameToUpdate);
         model.addAttribute("ruleNames", ruleNameRepository.findAll());
+        log.info("ruleNames updated");
         return "redirect:/ruleName/list";
     }
 
+    /**
+     * Endpoint to delete a RuleName object
+     * @param id is the RuleName id
+     * @param model
+     */
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: Find RuleName by Id and delete the RuleName, return to Rule list
         log.debug("deleteRuleName");
         RuleName ruleName = ruleNameRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ruleName Id:" + id));
         ruleNameRepository.delete(ruleName);
         model.addAttribute("ruleNames", ruleNameRepository.findAll());
+        log.info("ruleNames deleted");
         return "redirect:/ruleName/list";
     }
 }
