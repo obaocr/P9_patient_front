@@ -65,7 +65,6 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/list"))
                 .andExpect(status().isOk());
 
-        // Verify bidListRepository.findAll is called
         verify(tradeRepository, Mockito.times(1)).findAll();
     }
 
@@ -81,7 +80,6 @@ public class TradeControllerTest {
     // TODO avec ou sans param c'est OK... bizarre
     @Test
     void AddWithTradeShouldRedirect() throws Exception {
-        // Inutile mais je laisse
         Trade trade = new Trade();
         trade.setTradeId(1);
         trade.setAccount("Account");
@@ -98,7 +96,6 @@ public class TradeControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/trade/list"));
 
-        // Verify bidListRepository.save is called
         verify(tradeRepository, Mockito.times(1)).save(any());
     }
 
@@ -160,7 +157,6 @@ public class TradeControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/trade/list"));
 
-        // Verify Repository.save is called
         verify(tradeRepository, Mockito.times(1)).save(any());
     }
 
@@ -181,7 +177,6 @@ public class TradeControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/trade/list"));
 
-        // Verify bidListRepository.save is called
         verify(tradeRepository, Mockito.times(1)).delete(any());
     }
 

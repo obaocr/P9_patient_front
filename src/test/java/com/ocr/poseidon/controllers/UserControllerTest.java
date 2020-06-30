@@ -66,7 +66,6 @@ class UserControllerTest {
                 .andExpect(view().name("user/list"))
                 .andExpect(status().isOk());
 
-        // Verify bidListRepository.findAll is called
         verify(userRepository, Mockito.times(1)).findAll();
     }
 
@@ -100,7 +99,6 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/user/list"));
 
-        // Verify Repository.save is called
         verify(userRepository, Mockito.times(1)).save(any());
     }
 
@@ -147,7 +145,6 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/user/list"));
 
-        // Verify bidListRepository.save is called
         verify(userRepository, Mockito.times(1)).save(any());
     }
 
@@ -169,7 +166,6 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/user/list"));
 
-        // Verify bidListRepository.save is called
         verify(userRepository, Mockito.times(1)).delete(any());
     }
 }

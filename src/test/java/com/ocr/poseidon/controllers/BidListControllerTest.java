@@ -64,7 +64,6 @@ class BidListControllerTest {
                 .andExpect(view().name("bidList/list"))
                 .andExpect(status().isOk());
 
-        // Verify bidListRepository.findAll is called
         verify(bidListRepository, Mockito.times(1)).findAll();
     }
 
@@ -96,7 +95,6 @@ class BidListControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/bidList/list"));
 
-        // Verify bidListRepository.save is called
         verify(bidListRepository, Mockito.times(1)).save(any());
     }
 
@@ -179,7 +177,6 @@ class BidListControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/bidList/list"));
 
-        // Verify bidListRepository.save is called
         verify(bidListRepository, Mockito.times(1)).delete(any());
     }
 }

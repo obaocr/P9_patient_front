@@ -67,7 +67,6 @@ class CurveControllerTest {
                 .andExpect(view().name("curvePoint/list"))
                 .andExpect(status().isOk());
 
-        // Verify curvePointRepository.findAll is called
         verify(curvePointRepository, Mockito.times(1)).findAll();
     }
 

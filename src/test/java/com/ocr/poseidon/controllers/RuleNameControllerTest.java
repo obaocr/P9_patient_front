@@ -67,7 +67,6 @@ class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/list"))
                 .andExpect(status().isOk());
 
-        // Verify Repository.findAll is called
         verify(ruleNameRepository, Mockito.times(1)).findAll();
     }
 
@@ -103,7 +102,6 @@ class RuleNameControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/ruleName/list"));
 
-        // Verify bidListRepository.save is called
         verify(ruleNameRepository, Mockito.times(1)).save(any());
     }
 
@@ -171,7 +169,6 @@ class RuleNameControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/ruleName/list"));
 
-        // Verify bidListRepository.save is called
         verify(ruleNameRepository, Mockito.times(1)).save(any());
     }
 
@@ -194,7 +191,6 @@ class RuleNameControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/ruleName/list"));
 
-        // Verify bidListRepository.save is called
         verify(ruleNameRepository, Mockito.times(1)).delete(any());
     }
 

@@ -66,7 +66,6 @@ class RatingControllerTest {
                 .andExpect(view().name("rating/list"))
                 .andExpect(status().isOk());
 
-        // Verify rating.findAll is called
         verify(ratingRepository, Mockito.times(1)).findAll();
     }
 
@@ -100,7 +99,6 @@ class RatingControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/rating/list"));
 
-        // Verify Repository.save is called
         verify(ratingRepository, Mockito.times(1)).save(any());
     }
 
@@ -165,7 +163,6 @@ class RatingControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/rating/list"));
 
-        // Verify rating.save is called
         verify(ratingRepository, Mockito.times(1)).save(any());
     }
 
@@ -187,7 +184,6 @@ class RatingControllerTest {
                 .andDo(print())
                 .andExpect(redirectedUrl("/rating/list"));
 
-        // Verify rating.save is called
         verify(ratingRepository, Mockito.times(1)).delete(any());
     }
 }

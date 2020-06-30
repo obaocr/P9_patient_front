@@ -15,8 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PoseidonApplication {
 
     private static final Logger log = LogManager.getLogger(PoseidonApplication.class);
-
     public static void main(String[] args) {
         SpringApplication.run(PoseidonApplication.class, args);
     }
+
 }
