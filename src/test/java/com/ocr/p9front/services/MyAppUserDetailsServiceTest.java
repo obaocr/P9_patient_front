@@ -1,7 +1,7 @@
-package com.ocr.medicalcare.services;
+package com.ocr.p9front.services;
 
-import com.ocr.medicalcare.domain.User;
-import com.ocr.medicalcare.repositories.UserRepository;
+import com.ocr.p9front.domain.User;
+import com.ocr.p9front.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

@@ -1,4 +1,4 @@
-package com.ocr.medicalcare.domain;
+package com.ocr.p9front.domain;
 
 import org.junit.jupiter.api.Test;
 

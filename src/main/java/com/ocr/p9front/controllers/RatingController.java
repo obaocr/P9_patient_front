@@ -1,7 +1,7 @@
-package com.ocr.medicalcare.controllers;
+package com.ocr.p9front.controllers;
 
-import com.ocr.medicalcare.domain.Rating;
-import com.ocr.medicalcare.repositories.RatingRepository;
+import com.ocr.p9front.domain.Rating;
+import com.ocr.p9front.repositories.RatingRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

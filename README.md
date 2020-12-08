@@ -36,5 +36,5 @@ mvn spring-boot:run (run app)
 mvn spring-boot:stop (stop app) 
 
 ## Run & tests
-1. Run PoseidonApplication
-2. Open in a browser http://localhost:8045 for test environment
+1. Run MedicalCareApplication
+2. Open in a browser http://localhost:8046 for test environment

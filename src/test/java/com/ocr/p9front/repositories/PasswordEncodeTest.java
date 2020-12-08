@@ -1,4 +1,4 @@
-package com.ocr.medicalcare.repositories;
+package com.ocr.p9front.repositories;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

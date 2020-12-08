@@ -1,6 +1,6 @@
-package com.ocr.medicalcare.repositories;
+package com.ocr.p9front.repositories;
 
-import com.ocr.medicalcare.domain.User;
+import com.ocr.p9front.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;

@@ -1,6 +1,6 @@
-package com.ocr.medicalcare.config;
+package com.ocr.p9front.config;
 
-import com.ocr.medicalcare.services.MyAppUserDetailsService;
+import com.ocr.p9front.services.MyAppUserDetailsService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/bidList/**", "/rating/**", "/ruleName/**", "/trade/**", "/curvePoint/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers( "/rating/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN")
                 //.antMatchers("/user/**").permitAll()
                 .and().formLogin()  //login configuration
-                .defaultSuccessUrl("/bidList/list")
+                .defaultSuccessUrl("/rating/list")
                 .and().logout()    //logout configuration
                 .logoutUrl("/app-logout")
                 .logoutSuccessUrl("/")

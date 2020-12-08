@@ -1,7 +1,7 @@
-package com.ocr.medicalcare.controllers;
+package com.ocr.p9front.controllers;
 
-import com.ocr.medicalcare.domain.Rating;
-import com.ocr.medicalcare.repositories.RatingRepository;
+import com.ocr.p9front.domain.Rating;
+import com.ocr.p9front.repositories.RatingRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;

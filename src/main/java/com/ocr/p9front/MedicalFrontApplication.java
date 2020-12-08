@@ -7,16 +7,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Application PoseidonApplication
+ * Application MedicalFrontApplication
  */
 
 @SpringBootApplication
 @EnableEncryptableProperties
-public class PoseidonApplication {
+public class MedicalFrontApplication {
 
-    private static final Logger log = LogManager.getLogger(PoseidonApplication.class);
+    private static final Logger log = LogManager.getLogger(MedicalFrontApplication.class);
     public static void main(String[] args) {
-        SpringApplication.run(PoseidonApplication.class, args);
+        SpringApplication.run(MedicalFrontApplication.class, args);
     }
 
 }

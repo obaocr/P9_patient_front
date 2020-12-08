@@ -1,4 +1,4 @@
-package com.ocr.medicalcare.controllers;
+package com.ocr.p9front.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,7 +24,7 @@ public class HomeController {
     @RequestMapping("/admin/home")
     public String adminHome(Model model) {
         log.debug("adminHome");
-        return "redirect:/bidList/list";
+        return "redirect:/rating/list";
     }
 
 

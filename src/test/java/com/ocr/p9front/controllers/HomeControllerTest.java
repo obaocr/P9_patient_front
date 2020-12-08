@@ -1,4 +1,4 @@
-package com.ocr.medicalcare.controllers;
+package com.ocr.p9front.controllers;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,11 +12,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(BidListController.class)
+@WebMvcTest(RatingController.class)
 class HomeControllerTest {
 
     @Autowired
@@ -43,7 +44,7 @@ class HomeControllerTest {
         this.mockMvc.perform(get("/admin/home")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/bidList/list"));
+                .andExpect(redirectedUrl("/rating/list"));
     }
 
 }

@@ -1,6 +1,6 @@
-package com.ocr.medicalcare.repositories;
+package com.ocr.p9front.repositories;
 
-import com.ocr.medicalcare.domain.Rating;
+import com.ocr.p9front.domain.Rating;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

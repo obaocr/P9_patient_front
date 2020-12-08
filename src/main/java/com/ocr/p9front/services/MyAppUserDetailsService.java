@@ -1,7 +1,7 @@
-package com.ocr.medicalcare.services;
+package com.ocr.p9front.services;
 
-import com.ocr.medicalcare.domain.User;
-import com.ocr.medicalcare.repositories.UserRepository;
+import com.ocr.p9front.domain.User;
+import com.ocr.p9front.repositories.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
