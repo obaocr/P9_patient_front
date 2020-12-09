@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <a href="/patient/list">Patient</a>
+        </div>
+        <div class="col-6 text-right">
+            Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
+            <form th:action="@{/app-logout}" method="POST">
+                <input type="submit" value="Logout"/>
+            </form>
+        </div>
+    </div>
+    <div class="row"><h2>Patient List</h2></div>
+    <div class="row">
+        <a href="/patient/add" class="btn btn-primary btn-sm">Add New</a>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Familly</th>
+                <th>Given</th>
+                <th>Sex</th>
+                <th>Birth Date</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- TO-DO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
+            <tr th:if="${patients.empty}">
+                <td colspan="2"> No patients available </td>
+            </tr>
+            <tr th:each="patient : ${patients}">
+                <td><span th:text="${patient.Id}"> Id </span></td>
+                <td><span th:text="${patient.familly}"> familly </span></td>
+                <td><span th:text="${patient.given}"> given </span></td>
+                <td><span th:text="${patient.sex}"> sex </span></td>
+                <td><span th:text="${patient.birthDate}"> birthDate </span></td>
+                <td><span th:text="${patient.address}"> address </span></td>
+                <td><span th:text="${patient.phone}"> phone </span></td>
+                <td>
+                    <a th:href="@{'/patient/update/' + ${patient.Id}}" > Update </a> |
+                    <a th:href="@{'/patient/delete/' + ${patient.Id}}" > Delete </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
