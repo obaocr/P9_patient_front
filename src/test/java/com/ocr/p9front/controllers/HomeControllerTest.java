@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(RatingController.class)
+@WebMvcTest(HomeControllerTest.class)
 class HomeControllerTest {
 
     @Autowired
@@ -44,7 +44,7 @@ class HomeControllerTest {
         this.mockMvc.perform(get("/admin/home")
                 .characterEncoding("utf-8"))
                 .andDo(print())
-                .andExpect(redirectedUrl("/rating/list"));
+                .andExpect(redirectedUrl("/patient/list"));
     }
 
 }
