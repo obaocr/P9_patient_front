@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,7 +22,30 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     }
 
     public List<PatientDTO> getAllPatients() {
+
         return patientProxy.getPatients();
     };
+
+    public PatientDTO getPatientById(Integer Id) {
+        return patientProxy.getPatientById(Id);
+    }
+
+    public Integer addPatient(PatientDTO patient) {
+        // TODO verrue  à enlever ... rendre obligatoire la saisie de la date
+        if (patient.getBirthDate() == null) {
+            Date birth = new Date();
+            patient.setBirthDate(birth);
+        }
+        return patientProxy.addPatient(patient);
+    }
+
+    public Boolean updatePatient(PatientDTO patient) {
+        // TODO verrue  à enlever ... rendre obligatoire la saisie de la date
+        if (patient.getBirthDate() == null) {
+            Date birth = new Date();
+            patient.setBirthDate(birth);
+        }
+        return patientProxy.updatePatient(patient);
+    }
 
 }

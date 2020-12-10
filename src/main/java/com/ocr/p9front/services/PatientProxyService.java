@@ -7,4 +7,10 @@ import java.util.List;
 public interface PatientProxyService {
 
     List<PatientDTO> getAllPatients();
+
+    Integer addPatient(PatientDTO patient);
+
+    Boolean updatePatient(PatientDTO patient);
+
+    PatientDTO getPatientById(Integer Id);
 }

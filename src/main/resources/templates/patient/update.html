@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <h2>Update Rating</h2>
+    </div>
+
+    <div class="row">
+        <form action="#" th:action="@{/patient/update/{id}(id=${patient.id})}" th:object="${patient}" method="post" class="form-horizontal" style="width: 100%">
+
+            <div class="form-group" th:class="${#fields.hasErrors('familly')}? has-error" >
+                <label for="familly" class="col-sm-2 control-label">familly</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{familly}" class="form-control" id="familly" placeholder="Nom de famille"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('familly')}" th:errors="*{familly}">familly Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('given')}? has-error">
+                <label for="given" class="col-sm-2 control-label">given</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{given}" class="form-control" id="given" placeholder="Prénom"/>
+                    <span class="text-danger"  th:if="${#fields.hasErrors('given')}" th:errors="*{given}">given Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('address')}? has-error">
+                <label for="address" class="col-sm-2 control-label">address</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{address}" class="form-control" id="address" placeholder="Adresse postale"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('phone')}? has-error">
+                <label for="phone" class="col-sm-2 control-label">phone</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{phone}" class="form-control" id="phone" placeholder="Téléphone"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</span>
+                </div>
+            </div>
+            <div class="form-group" th:class="${#fields.hasErrors('sex')}? has-error">
+                <label for="sex" class="col-sm-2 control-label">sex</label>
+                <div class="col-sm-10">
+                    <input type="text" th:field="*{sex}" class="form-control" id="sex" placeholder="Genre M/F"/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{phone}">sex Error</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <a style="margin-top:15px" class="btn btn-danger btn-sm" href="/aptient/list"> Cancel </a>
+                    <input style="margin-top:15px" class="btn btn-primary btn-sm" type="submit" value="Submit" >
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
