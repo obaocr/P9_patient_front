@@ -45,7 +45,7 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
             Date birth = new Date();
             patient.setBirthDate(birth);
         }
-        return patientProxy.updatePatient(patient);
+        return patientProxy.updatePatient(patient.getId(), patient);
     }
 
 }

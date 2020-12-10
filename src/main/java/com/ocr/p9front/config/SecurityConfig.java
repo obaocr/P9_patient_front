@@ -28,11 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( "/rating/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers( "/patient/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/user/**").hasAnyAuthority("ADMIN")
                 //.antMatchers("/user/**").permitAll()
                 .and().formLogin()  //login configuration
-                .defaultSuccessUrl("/rating/list")
+                .defaultSuccessUrl("/patient/list")
                 .and().logout()    //logout configuration
                 .logoutUrl("/app-logout")
                 .logoutSuccessUrl("/")

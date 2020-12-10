@@ -24,7 +24,7 @@ public class HomeController {
     @RequestMapping("/admin/home")
     public String adminHome(Model model) {
         log.debug("adminHome");
-        return "redirect:/rating/list";
+        return "redirect:/patient/list";
     }
 
 
