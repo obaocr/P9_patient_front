@@ -118,21 +118,18 @@ public class PatientController {
     }
 
     /**
-     * Endpoint to delete a Rating object
-     * @param id is the Rating id
+     * Endpoint to delete a patient object
+     * @param id is the patient id
      * @param model
      */
-    /*@GetMapping("/rating/delete/{id}")
+    @GetMapping("/patient/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        // TO-DO: Find Rating by Id and delete the Rating, return to Rating list
         log.debug("deleteRating");
-        Rating rating = ratingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid rating Id:" + id));
-        ratingRepository.delete(rating);
-        model.addAttribute("ratings", ratingRepository.findAll());
-        log.info("rating deleted");
-        return "redirect:/rating/list";
+        PatientDTO patientDTO = patientProxyService.getPatientById(id);
+        patientProxyService.deletePatientById(patientDTO.getId());
+        model.addAttribute("patients", patientProxyService.getAllPatients());
+        log.info("patient deleted");
+        return "redirect:/patient/list";
     }
-
-     */
 
 }

@@ -13,4 +13,6 @@ public interface PatientProxyService {
     Boolean updatePatient(PatientDTO patient);
 
     PatientDTO getPatientById(Integer Id);
+
+    Boolean deletePatientById(Integer Id);
 }

@@ -48,4 +48,9 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
         return patientProxy.updatePatient(patient.getId(), patient);
     }
 
+    // TODO gérer anomalie
+    public Boolean deletePatientById(Integer Id) {
+        return patientProxy.deletePatient(Id);
+    }
+
 }

@@ -21,8 +21,10 @@ public interface PatientProxy {
     @PostMapping(value = "/Patient")
     Integer addPatient(@RequestBody PatientDTO patient);
 
-    //@PutMapping(value = "/Patient/{Id}")
     @RequestMapping(method = RequestMethod.PUT, value = "/Patient/{Id}")
     Boolean updatePatient(@RequestParam Integer Id, @RequestBody PatientDTO patient);
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/Patient/{Id}")
+    Boolean deletePatient(@RequestParam Integer Id);
 
 }
