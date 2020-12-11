@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class PatientDTO {
 
+    // TODO Annotations format de champs
     private Integer Id;
     private String familly;
     private String given;

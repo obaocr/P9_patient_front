@@ -105,13 +105,13 @@ public class PatientController {
             return "patient/update";
         }
         PatientDTO patient = patientProxyService.getPatientById(id);
-        patientDTO.setFamilly(patient.getFamilly());
-        patientDTO.setGiven(patient.getGiven());
-        patientDTO.setAddress(patient.getAddress());
-        patientDTO.setPhone(patient.getPhone());
-        patientDTO.setBirthDate(patient.getBirthDate());
-        patientDTO.setSex(patient.getSex());
-        patientProxyService.updatePatient(patientDTO);
+        patient.setFamilly(patientDTO.getFamilly());
+        patient.setGiven(patientDTO.getGiven());
+        patient.setAddress(patientDTO.getAddress());
+        patient.setPhone(patientDTO.getPhone());
+        patient.setBirthDate(patientDTO.getBirthDate());
+        patient.setSex(patientDTO.getSex());
+        patientProxyService.updatePatient(patient);
         model.addAttribute("patients", patientProxyService.getAllPatients());
         log.info("patient updated");
         return "redirect:/patient/list";
