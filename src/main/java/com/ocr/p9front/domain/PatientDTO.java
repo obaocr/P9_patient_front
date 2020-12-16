@@ -1,17 +1,27 @@
 package com.ocr.p9front.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 public class PatientDTO {
 
     // TODO Annotations format de champs
+    // https://www.baeldung.com/dates-in-thymeleaf
     private Integer Id;
+    @NotBlank(message = "Please enter a lastName")
     private String familly;
+    @NotBlank(message = "Please enter a firstName")
     private String given;
+    @NotBlank(message = "Please enter an address")
     private String address;
+    @NotBlank(message = "Please enter a phone")
     private String phone;
+    @NotBlank(message = "Please enter the gender")
     private String sex;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthDate;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
