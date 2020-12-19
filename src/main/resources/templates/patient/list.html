@@ -19,13 +19,20 @@
             </form>
         </div>
     </div>
+
     <div class="row"><h2>Patient List</h2></div>
     <div class="row">
         <a href="/patient/add" class="btn btn-primary btn-sm">Add New</a>
+    </div>
+    <div>
+        <h2></h2>
+    </div>
+
+    <div class="row">
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Familly</th>
                 <th>Given</th>
                 <th>Sex</th>
@@ -41,16 +48,16 @@
                 <td colspan="2"> No patients available </td>
             </tr>
             <tr th:each="patient : ${patients}">
-                <td><span th:text="${patient.Id}"> Id </span></td>
+                <td><span th:text="${patient.id}"> patientId </span></td>
                 <td><span th:text="${patient.familly}"> familly </span></td>
                 <td><span th:text="${patient.given}"> given </span></td>
                 <td><span th:text="${patient.sex}"> sex </span></td>
-                <td><span th:text="${patient.birthDate}"> birthDate </span></td>
+                <td><span th:text="${#dates.format(patient.birthDate,'dd-MM-yyyy')}"> birthDate </span></td>
                 <td><span th:text="${patient.address}"> address </span></td>
                 <td><span th:text="${patient.phone}"> phone </span></td>
                 <td>
-                    <a th:href="@{'/patient/update/' + ${patient.Id}}" > Update </a> |
-                    <a th:href="@{'/patient/delete/' + ${patient.Id}}" > Delete </a>
+                    <a th:href="@{'/patient/update/' + ${patient.id}}" > Update </a> |
+                    <a th:href="@{'/patient/delete/' + ${patient.id}}" > Delete </a>
                 </td>
             </tr>
             </tbody>

@@ -37,6 +37,10 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
             Date birth = new Date();
             patient.setBirthDate(birth);
         }
+        patient.setGiven(patient.getGiven().substring(0,1).toUpperCase() + patient.getGiven().substring(1).toLowerCase());
+        patient.setFamilly(patient.getFamilly().toUpperCase());
+        patient.setAddress(patient.getAddress().toUpperCase());
+        patient.setSex(patient.getSex().toUpperCase());
         return patientProxy.addPatient(patient);
     }
 
@@ -46,6 +50,10 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
             Date birth = new Date();
             patient.setBirthDate(birth);
         }
+        patient.setGiven(patient.getGiven().substring(0,1).toUpperCase() + patient.getGiven().substring(1).toLowerCase());
+        patient.setFamilly(patient.getFamilly().toUpperCase());
+        patient.setAddress(patient.getAddress().toUpperCase());
+        patient.setSex(patient.getSex().toUpperCase());
         return patientProxy.updatePatient(patient.getId(), patient);
     }
 

@@ -3,8 +3,11 @@ package com.ocr.p9front.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
+
+// TODO @Model ????
 
 public class PatientDTO {
 
@@ -12,14 +15,19 @@ public class PatientDTO {
     // https://www.baeldung.com/dates-in-thymeleaf
     private Integer Id;
     @NotBlank(message = "Please enter a lastName")
+    @Size(min = 1, max = 30)
     private String familly;
     @NotBlank(message = "Please enter a firstName")
+    @Size(min = 1, max = 30)
     private String given;
     @NotBlank(message = "Please enter an address")
+    @Size(min = 1, max = 100)
     private String address;
     @NotBlank(message = "Please enter a phone")
+    @Size(min = 9, max = 30)
     private String phone;
     @NotBlank(message = "Please enter the gender")
+    @Size(min = 1, max = 1)
     private String sex;
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthDate;

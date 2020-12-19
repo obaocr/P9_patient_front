@@ -48,7 +48,7 @@
                 <label for="sex" class="col-sm-2 control-label">sex</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{sex}" class="form-control" id="sex" placeholder="Genre M/F"/>
-                    <span class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{phone}">sex Error</span>
+                    <span class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">sex Error</span>
                 </div>
             </div>
 
