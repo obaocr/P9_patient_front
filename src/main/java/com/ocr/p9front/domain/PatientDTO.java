@@ -3,6 +3,7 @@ package com.ocr.p9front.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class PatientDTO {
     @NotBlank(message="Please enter the gender M/F")
     @Size(min = 1, max = 1, message="gender must be 1 character")
     private String sex;
-    @NotBlank(message="Please enter the birth date")
+    @NotNull(message="Please enter the birth date")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthDate;
     private LocalDateTime createDate;
