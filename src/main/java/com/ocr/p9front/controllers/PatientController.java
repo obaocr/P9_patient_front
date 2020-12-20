@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -62,7 +59,7 @@ public class PatientController {
      * @param model
      */
     @PostMapping("/patient/validate")
-    public String validate(@Valid PatientDTO patientDTO, BindingResult result, Model model) {
+    public String validate(@Valid @ModelAttribute(value="patient") PatientDTO patientDTO, BindingResult result, Model model) {
         log.debug("validate");
         if (result.hasErrors()) {
             log.error("errors = " + result.getAllErrors());
@@ -97,7 +94,7 @@ public class PatientController {
      * @param model
      */
     @PostMapping("/patient/update/{id}")
-    public String updatePatient(@PathVariable("id") Integer id, @Valid PatientDTO patientDTO,
+    public String updatePatient(@PathVariable("id") Integer id, @Valid @ModelAttribute(value="patient") PatientDTO patientDTO,
                                 BindingResult result, Model model) {
         log.debug("updatePatient");
         if (result.hasErrors()) {

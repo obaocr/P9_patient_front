@@ -32,7 +32,6 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     }
 
     public Integer addPatient(PatientDTO patient) {
-        // TODO verrue  à enlever ... rendre obligatoire la saisie de la date
         if (patient.getBirthDate() == null) {
             Date birth = new Date();
             patient.setBirthDate(birth);
@@ -45,7 +44,6 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     }
 
     public Boolean updatePatient(PatientDTO patient) {
-        // TODO verrue  à enlever ... rendre obligatoire la saisie de la date
         if (patient.getBirthDate() == null) {
             Date birth = new Date();
             patient.setBirthDate(birth);
@@ -57,7 +55,6 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
         return patientProxy.updatePatient(patient.getId(), patient);
     }
 
-    // TODO gérer anomalie
     public Boolean deletePatientById(Integer Id) {
         return patientProxy.deletePatient(Id);
     }
