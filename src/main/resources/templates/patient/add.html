@@ -33,7 +33,7 @@
             <div class="form-group" th:class="${#fields.hasErrors('birthDate')}? has-error">
                 <label for="birthDate" class="col-sm-2 control-label">birthDate</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{birthDate}" class="form-control" id="birthDate" placeholder="Date de naissance JJ/MM/AAAAA"/>
+                    <input type="text" th:field="*{birthDate}" class="form-control" id="birthDate" placeholder="jj/mm/aaaa"/>
                     <span class="text-danger"  th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">birthDate Error</span>
                 </div>
             </div>

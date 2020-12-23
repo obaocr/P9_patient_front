@@ -32,10 +32,6 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     }
 
     public Integer addPatient(PatientDTO patient) {
-        if (patient.getBirthDate() == null) {
-            Date birth = new Date();
-            patient.setBirthDate(birth);
-        }
         patient.setGiven(patient.getGiven().substring(0,1).toUpperCase() + patient.getGiven().substring(1).toLowerCase());
         patient.setFamilly(patient.getFamilly().toUpperCase());
         patient.setAddress(patient.getAddress().toUpperCase());
@@ -44,10 +40,6 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     }
 
     public Boolean updatePatient(PatientDTO patient) {
-        if (patient.getBirthDate() == null) {
-            Date birth = new Date();
-            patient.setBirthDate(birth);
-        }
         patient.setGiven(patient.getGiven().substring(0,1).toUpperCase() + patient.getGiven().substring(1).toLowerCase());
         patient.setFamilly(patient.getFamilly().toUpperCase());
         patient.setAddress(patient.getAddress().toUpperCase());

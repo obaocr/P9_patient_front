@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class PatientControllerTest {
     void GetAllShouldReturnOK() throws Exception {
         List<PatientDTO> patients = new ArrayList<>();
         PatientDTO patient = new PatientDTO();
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         LocalDateTime dtTest = LocalDateTime.now();
         patient.setId(1);
         patient.setAddress("12 rue des oliviers");
@@ -128,7 +129,7 @@ public class PatientControllerTest {
     void GetUpdateShouldReturnOK() throws Exception {
         final String UPDATE_URL = "/patient/update/" + "1";
         PatientDTO patient = new PatientDTO();
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         LocalDateTime dtTest = LocalDateTime.now();
         patient.setId(1);
         patient.setAddress("12 rue des oliviers");
@@ -152,7 +153,7 @@ public class PatientControllerTest {
         final String UPDATE_URL = "/patient/update/" + "1";
 
         PatientDTO patient = new PatientDTO();
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         LocalDateTime dtTest = LocalDateTime.now();
         patient.setId(1);
         patient.setAddress("12 rue des oliviers");
@@ -184,7 +185,7 @@ public class PatientControllerTest {
         final String DELETE_URL = "/patient/delete/" + "1";
 
         PatientDTO patient = new PatientDTO();
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         LocalDateTime dtTest = LocalDateTime.now();
         patient.setId(1);
         patient.setAddress("12 rue des oliviers");

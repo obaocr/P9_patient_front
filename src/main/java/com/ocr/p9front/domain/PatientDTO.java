@@ -4,7 +4,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -25,17 +27,18 @@ public class PatientDTO {
     private String phone;
     @NotBlank(message="Please enter the gender M/F")
     @Size(min = 1, max = 1, message="gender must be 1 character")
+    @Pattern(regexp = "(M|F)", message="gender must be 1 character M or F")
     private String sex;
     @NotNull(message="Please enter the birth date")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date birthDate;
+    private LocalDate birthDate;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
     public PatientDTO() {
     }
 
-    public PatientDTO(String familly, String given, String address, String phone, String sex, Date birthDate) {
+    public PatientDTO(String familly, String given, String address, String phone, String sex, LocalDate birthDate) {
         this.familly = familly;
         this.given = given;
         this.address = address;
@@ -92,11 +95,11 @@ public class PatientDTO {
         this.sex = sex;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

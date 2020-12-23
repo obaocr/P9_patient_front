@@ -3,6 +3,7 @@ package com.ocr.p9front.domain;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -13,7 +14,7 @@ public class PatientTest {
 
     @Test
     void patientModelTest () {
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         LocalDateTime dtTest = LocalDateTime.now();
         PatientDTO patient = new PatientDTO();
         patient.setId(1);
@@ -35,7 +36,7 @@ public class PatientTest {
 
     @Test
     void patientContructorTest () {
-        Date birth = new Date();
+        LocalDate birth = LocalDate.of(2000,1,15);
         PatientDTO patient = new PatientDTO("Martin","Olivier","25 rue des pinsons","0102030405","M",birth);
         assertTrue(patient != null);
         assertTrue(patient.getSex() == "M");
