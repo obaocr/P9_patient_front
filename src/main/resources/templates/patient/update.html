@@ -33,7 +33,7 @@
             <div class="form-group" th:class="${#fields.hasErrors('birthDate')}? has-error">
                 <label for="birthDate" class="col-sm-2 control-label">birthDate</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{birthDate}" class="form-control" id="birthDate" placeholder="jj/mm/aaaa"/>
+                    <input type="date" th:field="*{birthDate}" class="form-control" id="birthDate" placeholder="jj/mm/aaaa"/>
                     <span class="text-danger"  th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}">birthDate Error</span>
                 </div>
             </div>
@@ -54,7 +54,11 @@
             <div class="form-group" th:class="${#fields.hasErrors('sex')}? has-error">
                 <label for="sex" class="col-sm-2 control-label">sex</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{sex}" class="form-control" id="sex" placeholder="Genre M/F"/>
+                    <select th:field="*{sex}" class="form-control" id="sex">
+                        <option value="">--Gender--</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
                     <span class="text-danger" th:if="${#fields.hasErrors('sex')}" th:errors="*{sex}">sex Error</span>
                 </div>
             </div>

@@ -26,11 +26,9 @@ public class PatientDTO {
     @Size(min = 9, max = 30, message="phone must be between 1 and 15 characters")
     private String phone;
     @NotBlank(message="Please enter the gender M/F")
-    @Size(min = 1, max = 1, message="gender must be 1 character")
-    @Pattern(regexp = "(M|F)", message="gender must be 1 character M or F")
     private String sex;
     @NotNull(message="Please enter the birth date")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
