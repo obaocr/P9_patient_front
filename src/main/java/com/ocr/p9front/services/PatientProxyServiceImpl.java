@@ -24,7 +24,7 @@ public class PatientProxyServiceImpl implements  PatientProxyService {
     public List<PatientDTO> getAllPatients() {
 
         return patientProxy.getPatients();
-    };
+    }
 
     public PatientDTO getPatientById(Integer Id) {
 
