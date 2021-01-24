@@ -22,7 +22,7 @@
 
     <div class="row"><h2>Patient List</h2></div>
     <div class="row">
-        <a href="/patient/add" class="btn btn-primary btn-sm">Add New</a>
+        <a href="/patient/add" class="btn btn-primary btn-sm">Add new Patient</a>
     </div>
     <div>
         <h2></h2>
@@ -57,7 +57,8 @@
                 <td><span th:text="${patient.phone}"> phone </span></td>
                 <td>
                     <a th:href="@{'/patient/update/' + ${patient.id}}" > Update </a> |
-                    <a th:href="@{'/patient/delete/' + ${patient.id}}" > Delete </a>
+                    <a th:href="@{'/patient/delete/' + ${patient.id}}" > Delete </a> |
+                    <a th:href="@{'/notes/' + ${patient.id}}" > Patient Notes </a>
                 </td>
             </tr>
             </tbody>

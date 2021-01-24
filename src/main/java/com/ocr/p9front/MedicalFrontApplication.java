@@ -19,6 +19,8 @@ import java.util.List;
  * Application MedicalFrontApplication
  */
 
+// TODO affiher la liste des notes d'un patient, erreur 500 pour le moment ...
+
 @EnableFeignClients("com.ocr.p9front")
 @SpringBootApplication
 @EnableEncryptableProperties
