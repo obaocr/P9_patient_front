@@ -20,7 +20,8 @@
         </div>
     </div>
 
-    <div class="row"><h2>Patient Notes List</h2></div>
+    <div class="row"><h2>Patient <span th:text="${patient.familly + ' ' + patient.given}"></span></h2>
+    </div>
     <div class="row">
         <a href="/note/add" class="btn btn-primary btn-sm">Add Note</a>
     </div>
@@ -35,6 +36,7 @@
                 <th>#</th>
                 <th>Title</th>
                 <th>Note</th>
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -43,11 +45,12 @@
                 <td colspan="2"> No notes available </td>
             </tr>
             <tr th:each="note : ${notes}">
+                <td><span th:text="${note.noteId}"> # </span></td>
                 <td><span th:text="${note.title}"> title </span></td>
                 <td><span th:text="${note.note}"> note </span></td>
                 <td>
-                    <a th:href="@{'/note/update/' + ${note.id}}" > Update </a> |
-                    <a th:href="@{'/note/delete/' + ${note.id}}" > Delete </a> |
+                    <a th:href="@{'/note/update/' + ${note.noteId}}" > Update </a> |
+                    <a th:href="@{'/note/delete/' + ${note.noteId}}" > Delete </a>
                 </td>
             </tr>
             </tbody>

@@ -12,10 +12,10 @@ import java.util.List;
 public interface NoteProxy {
 
     @RequestMapping(method = RequestMethod.GET, value = "/notes/{Id}")
-    NoteDTO getNoteByNoteId(@RequestParam("Id") String Id);
+    NoteDTO getNoteByNoteId(@PathVariable("Id") String Id);
 
     @RequestMapping(method = RequestMethod.GET, value = "/notes/patient/{Id}")
-    List<NoteDTO> getNotesByPatientId(@RequestParam("Id") Integer Id);
+    List<NoteDTO> getNotesByPatientId(@PathVariable("Id") Integer Id);
 
     @PostMapping(value = "/notes")
     Integer addNote(@RequestBody NoteDTO note);
@@ -24,8 +24,7 @@ public interface NoteProxy {
     Boolean updateNote(@RequestBody NoteDTO note);
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/notes/{Id}")
-    Boolean deleteNote(@RequestParam String Id);
-
+    Boolean deleteNote(@PathVariable String Id);
 }
 
 

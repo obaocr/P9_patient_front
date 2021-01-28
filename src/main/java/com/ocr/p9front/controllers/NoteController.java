@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,15 +35,15 @@ public class NoteController {
      *
      * @return Patients Notes list
      */
-    @RequestMapping("/notes/{id}")
+    @GetMapping("/notes/{id}")
     public String patientNotes(@PathVariable("id") Integer id, Model model) {
         log.debug("ctrl patient notes list");
-        PatientDTO patientDTO = patientProxyService.getPatientById(id);
+        PatientDTO patient = patientProxyService.getPatientById(id);
         List<NoteDTO> notes = noteProxyService.getNoteByPatientId(id);
-        model.addAttribute("patient", patientDTO);
+        model.addAttribute("patient", patient);
         model.addAttribute("notes", notes);
         log.info("patients notes displayed");
-        return "/notes";
+        return "note/listPatientNote";
     }
 
 }
