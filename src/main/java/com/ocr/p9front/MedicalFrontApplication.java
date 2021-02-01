@@ -19,7 +19,9 @@ import java.util.List;
  * Application MedicalFrontApplication
  */
 
-// TODO affiher la liste des notes d'un patient, erreur 500 pour le moment ...
+// TODO erreur liste des notes d'1 patient si pas de notes
+// TODO bouton cancel note / revenir à la liste note d'un patient
+// TODO / note / lien vers liste d'un patient pour revenir
 
 @EnableFeignClients("com.ocr.p9front")
 @SpringBootApplication
@@ -31,5 +33,4 @@ public class MedicalFrontApplication {
     public static void main(String[] args) {
         SpringApplication.run(MedicalFrontApplication.class, args);
     }
-
 }

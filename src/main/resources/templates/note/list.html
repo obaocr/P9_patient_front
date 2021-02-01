@@ -20,10 +20,10 @@
         </div>
     </div>
 
-    <div class="row"><h2>Patient <span th:text="${patient.familly + ' ' + patient.given}"></span></h2>
+    <div class="row"><h2>Patient #<span th:text="${patient.id + ' - ' + patient.familly + ' ' + patient.given}"></span></h2>
     </div>
     <div class="row">
-        <a href="/note/add" class="btn btn-primary btn-sm">Add Note</a>
+        <a th:href="@{'/note/add/' + ${patient.id}}" class="btn btn-primary btn-sm">Add Note</a>
     </div>
     <div>
         <h2></h2>

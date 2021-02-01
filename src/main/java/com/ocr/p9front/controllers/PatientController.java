@@ -120,8 +120,8 @@ public class PatientController {
      * @param model
      */
     @GetMapping("/patient/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        log.debug("deleteRating");
+    public String deletePatient(@PathVariable("id") Integer id, Model model) {
+        log.debug("deleteNote");
         PatientDTO patientDTO = patientProxyService.getPatientById(id);
         patientProxyService.deletePatientById(patientDTO.getId());
         model.addAttribute("patients", patientProxyService.getAllPatients());

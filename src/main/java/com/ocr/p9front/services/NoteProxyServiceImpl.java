@@ -1,6 +1,7 @@
 package com.ocr.p9front.services;
 
 import com.ocr.p9front.domain.NoteDTO;
+import com.ocr.p9front.domain.PatientDTO;
 import com.ocr.p9front.proxies.NoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class NoteProxyServiceImpl implements NoteProxyService {
         return noteProxy.getNoteByNoteId(noteId);
     }
 
-    public Integer addNote(NoteDTO note) {
+    public NoteDTO addNote(NoteDTO note) {
         return noteProxy.addNote(note);
     }
 
