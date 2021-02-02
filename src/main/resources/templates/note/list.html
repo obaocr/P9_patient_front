@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <!--a href="/patient/list">Patient</a-->
+            <a href="/patient/list">Patient</a>
         </div>
         <div class="col-6 text-right">
             Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
@@ -40,7 +40,6 @@
             </tr>
             </thead>
             <tbody>
-            <!-- TO-DO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
             <tr th:if="${notes.empty}">
                 <td width="30%"colspan="2"> No notes available </td>
             </tr>
