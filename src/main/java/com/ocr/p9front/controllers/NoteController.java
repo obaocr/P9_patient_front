@@ -101,4 +101,45 @@ public class NoteController {
         return "note/list";
     }
 
+    /**
+     * Endpoint to display note updating form
+     * @param id noteId to be updated
+     * @param model
+     */
+    @GetMapping("/note/update/{id}")
+    public String showUpdateForm(@PathVariable("id") String id, Model model) {
+        log.debug("showUpdateForm");
+        NoteDTO noteDTO = noteProxyService.getNoteByNoteId(id);
+        model.addAttribute("note", noteDTO);
+        log.info("note get for update");
+        return "note/update";
+    }
+
+    /**
+     * Endpoint to validate for update
+     *
+     * @param id       is the note id
+     * @param noteDTO is the note object to be updated
+     * @param result  technical result
+     * @param model
+     */
+    @PostMapping("/note/update/{id}")
+    public String updateNote(@PathVariable("id") String id, @Valid @ModelAttribute(value="note") NoteDTO noteDTO,
+                                BindingResult result, Model model) {
+        log.debug("updateNote");
+        if (result.hasErrors()) {
+            log.error("errors = " + result.getAllErrors());
+            return "note/update";
+        }
+        NoteDTO note = noteProxyService.getNoteByNoteId(id);
+        note.setTitle(noteDTO.getTitle());
+        note.setNote(noteDTO.getNote());
+        noteProxyService.updateNote(note);
+        PatientDTO patient = patientProxyService.getPatientById(note.getPatientId());
+        model.addAttribute("patient", patient);
+        model.addAttribute("notes", noteProxyService.getNoteByPatientId(note.getPatientId()));
+        log.info("note updated");
+        return "redirect:/notes/"+note.getPatientId();
+    }
+
 }
