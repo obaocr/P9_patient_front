@@ -42,15 +42,15 @@
             <tbody>
             <!-- TO-DO: Show all Rating to the table, the Action column will have Edit & Delete buttons -->
             <tr th:if="${notes.empty}">
-                <td colspan="2"> No notes available </td>
+                <td width="30%"colspan="2"> No notes available </td>
             </tr>
             <tr th:each="note : ${notes}">
-                <td><span th:text="${note.noteId}"> # </span></td>
-                <td><span th:text="${note.title}"> title </span></td>
-                <td><span th:text="${note.note}"> note </span></td>
-                <td>
-                    <a th:href="@{'/note/update/' + ${note.noteId}}" > Update </a> |
-                    <a th:href="@{'/note/delete/' + ${note.noteId}}" > Delete </a>
+                <td width="5%"><span th:text="${note.noteId}"> # </span></td>
+                <td width="25%"><span th:text="${note.title}"> title </span></td>
+                <td width="60%"> <span th:text="${note.note}"> note </span></td>
+                <td width="10%">
+                    <a th:href="@{'/note/update/' + ${note.noteId}}" > Upd </a> |
+                    <a th:href="@{'/note/delete/' + ${note.noteId}}" > Del </a>
                 </td>
             </tr>
             </tbody>

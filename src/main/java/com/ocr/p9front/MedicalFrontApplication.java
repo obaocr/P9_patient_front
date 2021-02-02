@@ -22,7 +22,6 @@ import java.util.List;
 // TODO erreur liste des notes d'1 patient si pas de notes
 // TODO bouton cancel note / revenir à la liste note d'un patient
 // TODO / note / lien vers liste d'un patient pour revenir
-// TODO / saisie note / tester la saisie de saut de ligne
 
 @EnableFeignClients("com.ocr.p9front")
 @SpringBootApplication
