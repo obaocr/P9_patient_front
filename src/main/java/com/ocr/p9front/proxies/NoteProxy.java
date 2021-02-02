@@ -1,14 +1,14 @@
 package com.ocr.p9front.proxies;
 
 import com.ocr.p9front.domain.NoteDTO;
-import com.ocr.p9front.domain.PatientDTO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-// TODO getNotesByPatientId : voir pour route notes uniquement
 
 @FeignClient(name = "microservice-note", url = "http://localhost:8049")
 public interface NoteProxy {

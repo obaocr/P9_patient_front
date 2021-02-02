@@ -19,8 +19,6 @@ import java.util.List;
  * Application MedicalFrontApplication
  */
 
-// TODO erreur liste des notes d'1 patient si pas de notes
-// TODO bouton cancel note / revenir à la liste note d'un patient
 // TODO Tests et couverture de code ...
 
 @EnableFeignClients("com.ocr.p9front")

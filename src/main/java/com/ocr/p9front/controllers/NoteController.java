@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +43,12 @@ public class NoteController {
     public String patientNotes(@PathVariable("id") Integer id, Model model) {
         log.debug("ctrl patient notes list");
         PatientDTO patient = patientProxyService.getPatientById(id);
-        List<NoteDTO> notes = noteProxyService.getNoteByPatientId(id);
+        List<NoteDTO> notes = new ArrayList<>();
+        try {
+            notes = noteProxyService.getNoteByPatientId(id);
+        } catch (Exception e) {
+            log.info("Ctrl getNoteByPatientId Exception :"+ e.getMessage());
+        }
         model.addAttribute("patient", patient);
         model.addAttribute("notes", notes);
         log.info("patients notes displayed");
