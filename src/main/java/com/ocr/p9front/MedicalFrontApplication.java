@@ -19,7 +19,7 @@ import java.util.List;
  * Application MedicalFrontApplication
  */
 
-// TODO Tests et couverture de code ... NoteCtrlTest à faire ...
+// TODO Tests et couverture de code final
 
 @EnableFeignClients("com.ocr.p9front")
 @SpringBootApplication
