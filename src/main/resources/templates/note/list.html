@@ -22,6 +22,8 @@
 
     <div class="row"><h2>Patient #<span th:text="${patient.id + ' - ' + patient.familly + ' ' + patient.given}"></span></h2>
     </div>
+    <div class="row"><h2>Assess #<span th:text="${assess.patientInfo + ' - ' + assess.risk}"></span></h2>
+    </div>
     <div class="row">
         <a th:href="@{'/note/add/' + ${patient.id}}" class="btn btn-primary btn-sm">Add Note</a>
     </div>

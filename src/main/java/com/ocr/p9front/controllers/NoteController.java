@@ -2,6 +2,8 @@ package com.ocr.p9front.controllers;
 
 import com.ocr.p9front.domain.NoteDTO;
 import com.ocr.p9front.domain.PatientDTO;
+import com.ocr.p9front.domain.PatientRiskDTO;
+import com.ocr.p9front.proxies.AssessProxy;
 import com.ocr.p9front.services.NoteProxyService;
 import com.ocr.p9front.services.PatientProxyService;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +36,9 @@ public class NoteController {
     @Autowired
     NoteProxyService noteProxyService;
 
+    @Autowired
+    AssessProxy assessProxy;
+
     /**
      * Endpoint for Patients Notes list
      *
@@ -49,8 +54,12 @@ public class NoteController {
         } catch (Exception e) {
             log.info("Ctrl getNoteByPatientId Exception :"+ e.getMessage());
         }
+
+        PatientRiskDTO patientRisk = assessProxy.getPatientRiskById(id);
+
         model.addAttribute("patient", patient);
         model.addAttribute("notes", notes);
+        model.addAttribute("assess", patientRisk);
         log.info("patients notes displayed");
         return "note/list";
     }
