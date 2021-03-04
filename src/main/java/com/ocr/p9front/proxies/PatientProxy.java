@@ -12,19 +12,19 @@ import java.util.List;
 @FeignClient(name = "microservice-patient", url = "http://localhost:8045")
 public interface PatientProxy {
 
-    @GetMapping(value = "/Patients")
+    @GetMapping(value = "/patient")
     List<PatientDTO> getPatients();
 
-    @RequestMapping(method = RequestMethod.GET, value = "/Patient")
-    PatientDTO getPatientById(@RequestParam("Id") Integer Id);
+    @RequestMapping(method = RequestMethod.GET, value = "/patient/{Id}")
+    PatientDTO getPatientById(@PathVariable("Id") Integer Id);
 
-    @PostMapping(value = "/Patient")
+    @PostMapping(value = "/patient")
     Integer addPatient(@RequestBody PatientDTO patient);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/Patient/{Id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/patient/{Id}")
     Boolean updatePatient(@RequestParam Integer Id, @RequestBody PatientDTO patient);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/Patient/{Id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/patient/{Id}")
     Boolean deletePatient(@RequestParam Integer Id);
 
 }

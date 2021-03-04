@@ -44,7 +44,7 @@ public class NoteControllerTest {
     @MockBean
     private NoteProxyService noteProxyService;
 
-    // Pour utiliser que ce bean dans un contexte avec spring security ... ça passe
+    // This bean in spring security context
     @Configuration
     static class ContextConfiguration {
         @Bean
