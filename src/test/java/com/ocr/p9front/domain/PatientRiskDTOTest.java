@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test Class for PatientRisk model
+ */
 public class PatientRiskDTOTest {
 
     @Test

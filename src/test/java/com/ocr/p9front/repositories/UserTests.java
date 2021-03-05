@@ -9,6 +9,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test Class for User
+ */
 @SpringBootTest
 class UserTests {
 

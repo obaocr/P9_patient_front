@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+/**
+ * Test Class for Home
+ */
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(HomeControllerTest.class)

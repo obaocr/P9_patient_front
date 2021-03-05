@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test Class for Note model
+ */
 public class NoteTest {
 
     @Test

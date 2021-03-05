@@ -10,6 +10,9 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test Class for User model
+ */
 class UserTest {
 
     @Test

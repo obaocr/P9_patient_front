@@ -30,6 +30,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Test Class for PatientController
+ */
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(PatientController.class)

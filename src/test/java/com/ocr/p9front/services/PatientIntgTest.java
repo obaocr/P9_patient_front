@@ -10,6 +10,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Integration Test Class
+ */
 @SpringBootTest
 class PatientIntgTest {
 

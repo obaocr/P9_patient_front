@@ -4,6 +4,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+/**
+ * Model for Note
+ */
 public class NoteDTO {
 
     private String noteId;

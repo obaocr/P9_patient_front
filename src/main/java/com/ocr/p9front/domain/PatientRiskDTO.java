@@ -1,5 +1,8 @@
 package com.ocr.p9front.domain;
 
+/**
+ * Model for Patient Risk
+ */
 public class PatientRiskDTO {
     private Integer patientId;
     private String patientInfo;
