@@ -22,7 +22,7 @@
 
     <div class="row"><h2>Patient #<span th:text="${patient.id + ' - ' + patient.familly + ' ' + patient.given}"></span></h2>
     </div>
-    <div class="row"><h2>Assess #<span th:text="${assess.patientInfo + ' - ' + assess.risk}"></span></h2>
+    <div class="row"><h2>Assess #<span th:text="${assess.patientInfo + ' - ' + assess.risk + ' - Nb triggers : ' + assess.nbrisk}"></span></h2>
     </div>
     <div class="row">
         <a th:href="@{'/note/add/' + ${patient.id}}" class="btn btn-primary btn-sm">Add Note</a>
@@ -51,7 +51,7 @@
                 <td width="60%"> <span th:text="${note.note}"> note </span></td>
                 <td width="10%">
                     <a th:href="@{'/note/update/' + ${note.noteId}}" > Upd </a> |
-                    <a th:href="@{'/note/delete/' + ${note.noteId}}" > Del </a>
+                    <a th:href="@{'/note/delete/' + ${note.noteId}}"  onclick="return confirm('Are you sure to delete this item ?')"> Del </a>
                 </td>
             </tr>
             </tbody>

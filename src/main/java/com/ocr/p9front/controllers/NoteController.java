@@ -154,7 +154,7 @@ public class NoteController {
         PatientDTO patient = patientProxyService.getPatientById(note.getPatientId());
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteProxyService.getNoteByPatientId(note.getPatientId()));
-        model.addAttribute("assess", assessProxy.getPatientRiskById(noteDTO.getPatientId()));
+        model.addAttribute("assess", assessProxy.getPatientRiskById(note.getPatientId()));
         log.info("note updated");
         return "redirect:/notes/"+note.getPatientId();
     }

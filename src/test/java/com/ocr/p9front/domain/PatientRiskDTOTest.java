@@ -15,7 +15,9 @@ public class PatientRiskDTOTest {
         patientRiskDTO.setPatientId(1);
         patientRiskDTO.setPatientInfo("test info");
         patientRiskDTO.setRisk("None");
+        patientRiskDTO.setNbrisk(1);
         assertTrue(patientRiskDTO.getPatientId() == 1);
+        assertTrue(patientRiskDTO.getNbrisk() == 1);
         assertTrue(patientRiskDTO.getPatientInfo().equals("test info"));
         assertTrue(patientRiskDTO.getRisk().equals("None"));
     }
