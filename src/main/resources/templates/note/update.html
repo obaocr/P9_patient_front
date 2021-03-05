@@ -18,8 +18,16 @@
 
             <div class="form-group" th:class="${#fields.hasErrors('note')}? has-error" >
                 <label for="title" class="col-sm-2 control-label">Title</label>
-                <div class="col-sm-10">
+                <!--div class="col-sm-10">
                     <input type="text" th:field="*{title}" class="form-control" id="title" placeholder="Titre de la note..."/>
+                    <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</span>
+                </div-->
+                <div class="col-sm-10">
+                    <select th:field="*{title}" class="form-control" id="title">
+                        <option value="">--Title--</option>
+                        <option value="Medical note">Medical note</option>
+                        <option value="Other">Other</option>
+                    </select>
                     <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title Error</span>
                 </div>
             </div>
