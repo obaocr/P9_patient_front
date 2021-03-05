@@ -2,6 +2,8 @@ package com.ocr.p9front.controllers;
 
 import com.ocr.p9front.domain.NoteDTO;
 import com.ocr.p9front.domain.PatientDTO;
+import com.ocr.p9front.domain.PatientRiskDTO;
+import com.ocr.p9front.proxies.AssessProxy;
 import com.ocr.p9front.services.NoteProxyService;
 import com.ocr.p9front.services.PatientProxyService;
 import org.junit.jupiter.api.Test;
@@ -44,6 +46,9 @@ public class NoteControllerTest {
     @MockBean
     private NoteProxyService noteProxyService;
 
+    @MockBean
+    private AssessProxy assessProxy;
+
     // This bean in spring security context
     @Configuration
     static class ContextConfiguration {
@@ -74,8 +79,16 @@ public class NoteControllerTest {
         patient.setCreateDate(dtTest);
         patient.setUpdateDate(dtTest);
 
+        PatientRiskDTO patientRiskDTO = new PatientRiskDTO();
+        patientRiskDTO.setPatientId(1);
+        patientRiskDTO.setCalculated(true);
+        patientRiskDTO.setPatientInfo("Infos patient");
+        patientRiskDTO.setRisk("None");
+
         when(noteProxyService.getNoteByPatientId(1)).thenReturn(notes);
         when(patientProxyService.getPatientById(1)).thenReturn(patient);
+        when(assessProxy.getPatientRiskById(1)).thenReturn(patientRiskDTO);
+
         this.mockMvc.perform(get("/notes/1")
                 .characterEncoding("utf-8"))
                 .andDo(print())
@@ -106,8 +119,15 @@ public class NoteControllerTest {
         patient.setCreateDate(dtTest);
         patient.setUpdateDate(dtTest);
 
+        PatientRiskDTO patientRiskDTO = new PatientRiskDTO();
+        patientRiskDTO.setPatientId(1);
+        patientRiskDTO.setCalculated(true);
+        patientRiskDTO.setPatientInfo("Infos patient");
+        patientRiskDTO.setRisk("None");
+
         when(noteProxyService.getNoteByNoteId("1")).thenReturn(note);
         when(patientProxyService.getPatientById(1)).thenReturn(patient);
+        when(assessProxy.getPatientRiskById(1)).thenReturn(patientRiskDTO);
 
         this.mockMvc.perform(get(DELETE_URL)
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)

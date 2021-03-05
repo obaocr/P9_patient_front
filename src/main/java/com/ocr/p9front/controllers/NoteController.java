@@ -112,6 +112,7 @@ public class NoteController {
         PatientDTO patient = patientProxyService.getPatientById(noteDTO.getPatientId());
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteProxyService.getNoteByPatientId(noteDTO.getPatientId()));
+        model.addAttribute("assess", assessProxy.getPatientRiskById(noteDTO.getPatientId()));
         log.info("note deleted");
         return "note/list";
     }
@@ -153,6 +154,7 @@ public class NoteController {
         PatientDTO patient = patientProxyService.getPatientById(note.getPatientId());
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteProxyService.getNoteByPatientId(note.getPatientId()));
+        model.addAttribute("assess", assessProxy.getPatientRiskById(noteDTO.getPatientId()));
         log.info("note updated");
         return "redirect:/notes/"+note.getPatientId();
     }
