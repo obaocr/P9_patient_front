@@ -50,3 +50,26 @@ A step by step series of examples that tell you how to get a development env run
 
 ### Other consideration
 JAVADOC has been initialized and needs to be completed.
+
+### Set up docker image/container n a local environment
+1. Build the JAR for all projects (mvn package in a command window)
+2. Set up the host file for the Docker container
+Edit C:\Windows\System32\drivers\etc\hosts and add
+   127.0.0.1 patient
+   127.0.0.1 note
+   127.0.0.1 patientrisk
+3. Create a Docker network
+   docker network create p9network
+4. Buid the Docker image
+   docker build --tag patient .
+   docker build --tag notes .
+   docker build --tag p9-patientrisk .
+5. Run the container
+   docker run -p 8045:8045 --name patient --network p9network p9-patient
+   docker run -p 8049:8049 --name note --network p9network p9-note
+   docker run -p 8052:8052 --name patientrisk --network p9network p9-patientrisk
+6. Launch the application
+   Start the MongoDB  : mongod --auth --port 27017
+   Start the MySQL DB (auto lauch)
+   Start the application p9_patient_front
+    
