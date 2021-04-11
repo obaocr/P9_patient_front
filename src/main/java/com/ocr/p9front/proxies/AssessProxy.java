@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Proxy for PatientRisk / micro service
  */
-@FeignClient(name = "microservice-patient-risk", url = "http://localhost:8052")
+@FeignClient(name = "microservice-patient-risk", url = "http://patientrisk:8052")
 public interface AssessProxy {
 
     @RequestMapping(method = RequestMethod.GET, value = "/assess/{Id}")

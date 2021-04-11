@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Proxy for Patient / micro service
  */
-@FeignClient(name = "microservice-patient", url = "http://localhost:8045")
+@FeignClient(name = "microservice-patient", url = "http://patient:8045")
 public interface PatientProxy {
 
     @GetMapping(value = "/patient")
