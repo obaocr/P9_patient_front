@@ -51,7 +51,7 @@ A step by step series of examples that tell you how to get a development env run
 ### Other consideration
 JAVADOC has been initialized and needs to be completed.
 
-### Set up docker image/container n a local environment
+### Set up docker image/container in a local environment
 1. Build the JAR for all projects (mvn package in a command window)
 2. Set up the host file for the Docker container
 Edit C:\Windows\System32\drivers\etc\hosts and add
