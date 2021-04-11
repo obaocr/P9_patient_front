@@ -39,8 +39,8 @@ Spring security is used
 
 ### Installing
 A step by step series of examples that tell you how to get a development env running:
-1.Install Java: https : https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html
-3.Spring : https://spring.io
+1. Install Java: https : https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html
+3. Spring : https://spring.io
 
 
 ### Testing
@@ -52,26 +52,36 @@ A step by step series of examples that tell you how to get a development env run
 JAVADOC has been initialized and needs to be completed.
 
 ### Set up docker image/container in a local environment
-1. Build the JAR for all projects (mvn package in a command window)
-2. Set up the host file for the Docker container
-Edit C:\Windows\System32\drivers\etc\hosts and add
-   127.0.0.1 patient
-   127.0.0.1 note
-   127.0.0.1 patientrisk
+1. Build the JAR for all projects
+* Open a command in the project directory
+* execute the command : mvn clean
+* execute the command : mvn package
+
+
+2. Set up the host file for the Docker container, Edit C:\Windows\System32\drivers\etc\hosts and add the lines  
+*  127.0.0.1 patient
+*  127.0.0.1 note
+*  127.0.0.1 patientrisk
+*  127.0.0.1 patientfront
+
 3. Create a Docker network
-   docker network create p9network
+* Open a command in the target directory
+* execute the command : docker network create p9network
+
 4. Buid the Docker image
-   docker build --tag p9-patient .
-   docker build --tag p9-notes .
-   docker build --tag p9-patientrisk .
-   docker build --tag p9-patientfront .
+*   execute the command : docker build --tag p9-patient .
+*   execute the command : docker build --tag p9-notes .
+*   execute the command : docker build --tag p9-patientrisk .
+*   execute the command : docker build --tag p9-patientfront .
+
 5. Run the container
-   docker run -p 8045:8045 --name patient --network p9network p9-patient
-   docker run -p 8049:8049 --name note --network p9network p9-note
-   docker run -p 8052:8052 --name patientrisk --network p9network p9-patientrisk
-   docker run -p 8047:8047 --name patientfront --network p9network p9-patientfront
+*   execute the command : docker run -p 8045:8045 --name patient --network p9network p9-patient
+*   execute the command : docker run -p 8049:8049 --name note --network p9network p9-note
+*   execute the command : docker run -p 8052:8052 --name patientrisk --network p9network p9-patientrisk
+*   execute the command : docker run -p 8047:8047 --name patientfront --network p9network p9-patientfront
+
 6. Launch the application
-   Start the MongoDB  : mongod --auth --port 27017
-   Start the MySQL DB (auto lauch)
-   Start the application p9_patient_front
+*   Start the MongoDB  : mongod --auth --port 27017
+*   Start the MySQL DB if not started (auto lauch)
+*   Start the application in a navigator and go to http://patientfront:8047/
     
